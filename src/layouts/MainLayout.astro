@@ -5,6 +5,7 @@ import Navbar from "@components/sections/navbar&footer/Navbar.astro";
 import FooterSection from "@components/sections/navbar&footer/FooterSection.astro";
 import { SITE } from "@data/constants";
 import "@styles/global.css";
+import TopBar from "@/components/sections/navbar&footer/TopBar.astro";
 
 // Setting expected props
 const {
@@ -55,14 +56,17 @@ interface Props {
     </script>
   </head>
   <body
-    class="bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800 flex flex-col min-h-screen"
+    class="bg-neutral-50 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800 flex flex-col min-h-screen"
   >
     {/*
     Setting up the main structure of the page.
     The Navbar is placed at the top, with a slot for the main content and FooterSection at the bottom.
     */}
-    <div class="w-full mx-auto max-w-(--breakpoint-2xl) px-4 sm:px-6 lg:px-8 flex-grow">
-      <!-- <Navbar /> -->
+    <div class="w-full mx-auto max-w-(--breakpoint-5xl) px-4 sm:px-6 lg:px-8 flex-grow">
+      <TopBar />
+      <Navbar />
+      <!-- Separator -->
+      <div class="my-8 border-t-2 border-neutral-300 dark:border-neutral-700"></div>
       <main>
         <slot />
       </main>

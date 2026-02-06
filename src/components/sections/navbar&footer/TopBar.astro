@@ -1,0 +1,23 @@
+
+---
+
+import { SITE_CONFIG } from "@/utils/site-info";
+import WhatsappIcon from '../../ui/icons/WhatsappIcon.astro'
+
+---
+
+<div class="my-4 hidden md:flex w-full items-center justify-between px-6 bg-gray-100 dark:bg-neutral-700 py-1 rounded-3xl text-sm text-neutral-700 dark:text-neutral-300 z-20">
+    <!-- Call for reservation -->
+     <div class=""><p>Call us for a reservation: <span>{SITE_CONFIG.reservationContact}</span> </p></div>
+
+    <!-- Reservation times -->
+     <div class="">
+        <p>Online reservations are only available during our business hours: <span class="underline">All days ({SITE_CONFIG.reservationHours})</span></p>
+     </div>
+
+    <!-- Whatsapp icon and get in touch -->
+     <div class="flex items-center gap-2">
+        <p class="flex items-center">Get in touch! </p>
+            <WhatsappIcon /> 
+     </div>
+</div>
