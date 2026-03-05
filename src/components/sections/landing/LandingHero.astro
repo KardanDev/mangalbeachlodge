@@ -1,0 +1,115 @@
+<section class="mx-auto w-full max-w-[1440px] px-4 pb-10 pt-10 sm:px-6 lg:px-10 lg:pb-14 lg:pt-16">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end">
+    <div>
+      <h1 class="max-w-3xl text-pretty text-5xl font-medium leading-[0.95] tracking-tight text-zinc-800 sm:text-6xl lg:text-7xl xl:text-[6.25rem]">
+        The Best Resort for
+        <span class="block">best holiday in the</span>
+        <span class="block">Inhambane</span>
+      </h1>
+
+      <img
+        src="/mangal-entrance.png"
+        alt="Mangal Beach Lodge entrance"
+        class="mt-8 h-28 w-full max-w-[430px] rounded-[999px] object-cover sm:h-32"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <p class="mt-6 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit aenean commodo
+        ligula eget dolor. Cum sociis natoque penatibus et magnis dis parturient
+        montes, nascetur ridiculus mus donec.
+      </p>
+
+      <div class="mt-10 flex flex-col gap-4 rounded-[2rem] bg-zinc-100 px-6 py-5 text-zinc-900 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-lg font-semibold sm:text-3xl">* Vilankulos, Inhambane, Mozambique</p>
+
+        <a href="#" class="inline-flex items-center gap-2 text-base font-medium text-zinc-700 transition-colors hover:text-zinc-900">
+          See direction
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M3.75 10H16.25M16.25 10L10 3.75M16.25 10L10 16.25"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <aside class="relative min-h-[580px] overflow-hidden rounded-[2rem] border border-white/10 sm:min-h-[640px]">
+      <img
+        src="/availability-form-bg.png"
+        alt="Tropical shoreline at Mangal Beach Lodge"
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-linear-to-t from-black/55 via-black/15 to-transparent"></div>
+
+      <div class="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+        <h2 class="text-4xl font-medium text-white">Ask for availability</h2>
+
+        <form action="#" method="post" class="mt-6 space-y-3" aria-label="Availability form">
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="relative">
+              <label for="date" class="sr-only">Select date</label>
+              <select
+                id="date"
+                name="date"
+                class="h-12 w-full appearance-none rounded-full border-none bg-white px-5 pr-10 text-base text-zinc-700 focus:outline-none focus:ring-2 focus:ring-white/70"
+              >
+                <option selected>Select date</option>
+              </select>
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.94a.75.75 0 0 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
+              </svg>
+            </div>
+
+            <div class="relative">
+              <label for="type" class="sr-only">Select type</label>
+              <select
+                id="type"
+                name="type"
+                class="h-12 w-full appearance-none rounded-full border-none bg-white px-5 pr-10 text-base text-zinc-700 focus:outline-none focus:ring-2 focus:ring-white/70"
+              >
+                <option selected>Select type</option>
+              </select>
+              <svg class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.94a.75.75 0 0 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-[1fr_auto]">
+            <div>
+              <label for="email" class="sr-only">Email address</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter email address"
+                class="h-12 w-full rounded-full border-none bg-white px-5 text-base text-zinc-700 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/70"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="h-12 rounded-full bg-zinc-900 px-10 text-base font-semibold text-white transition-colors hover:bg-black"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
+    </aside>
+  </div>
+</section>

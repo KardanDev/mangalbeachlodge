@@ -1,0 +1,65 @@
+---
+const navLinks = ["Home", "Rooms", "Services", "Gallery", "About Us", "Contact"];
+---
+
+<header class="border-b border-white/15">
+  <div class="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-5 sm:px-6 lg:px-10">
+    <a href="#" class="shrink-0" aria-label="Mangal Beach Lodge">
+      <img
+        src="/brand-logo.png"
+        alt="Mangal Beach Lodge logo"
+        class="h-12 w-auto sm:h-14"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
+      {
+        navLinks.map((link, index) => (
+          <a
+            href="#"
+            class:list={[
+              "text-base font-semibold transition-colors",
+              index === 0 ? "text-amber-500" : "text-zinc-500 hover:text-white",
+            ]}
+          >
+            {link}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="#"
+      class="hidden rounded-2xl bg-zinc-800 px-9 py-4 text-base font-semibold tracking-wide text-white transition-colors hover:bg-zinc-700 lg:inline-flex"
+    >
+      RESERVATION
+    </a>
+  </div>
+
+  <div class="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 pb-5 sm:px-6 lg:hidden">
+    <nav class="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="Mobile primary">
+      {
+        navLinks.map((link, index) => (
+          <a
+            href="#"
+            class:list={[
+              "text-sm font-semibold transition-colors",
+              index === 0 ? "text-amber-500" : "text-zinc-400 hover:text-white",
+            ]}
+          >
+            {link}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="#"
+      class="inline-flex rounded-xl bg-zinc-800 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-zinc-700"
+    >
+      RESERVATION
+    </a>
+  </div>
+</header>
