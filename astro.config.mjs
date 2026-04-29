@@ -3,6 +3,8 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import compressor from "astro-compressor";
 import starlight from "@astrojs/starlight";
+import vercel from "@astrojs/vercel/serverless";
+
 
 import mdx from "@astrojs/mdx";
 
@@ -25,6 +27,7 @@ export default defineConfig({
   //     prefixDefaultLocale: false,
   //   },
   // },
+  adapter: vercel(),
   prefetch: true,
   integrations: [sitemap({
     i18n: {
