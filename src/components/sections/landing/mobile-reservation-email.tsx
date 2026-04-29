@@ -1,7 +1,7 @@
 "use client"
 
 import { useId, useMemo, useState } from "react"
-import { differenceInCalendarDays, format } from "date-fns"
+import { differenceInCalendarDays, format, formatDate } from "date-fns"
 import { CalendarIcon, ChevronDownIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -127,6 +127,9 @@ function MobileReservationEmail() {
 
     const [checkInOpen, setCheckInOpen] = useState(false)
     const [checkOutOpen, setCheckOutOpen] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
     const [checkInDate, setCheckInDate] = useState<Date | undefined>()
 
@@ -281,30 +284,51 @@ function MobileReservationEmail() {
                 ? "Villa is the better fit for this guest count."
                 : `You will likely need more than one room request.`
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        console.log({
-            fullName,
-            email,
-            phone,
-            checkInDate,
-            checkOutDate,
-            adults: adultsCount,
-            children: childrenCount,
-            guestCount,
-            roomType,
-            season: activeSeasonKey,
-            nightlyRate,
-            nights,
-            extraAdultBeds,
-            extraChildBeds,
-            estimatedTotal,
-            roomFitsSelectedType,
-            roomFitsSuggestedType,
-            roomRequestCount,
-            specialRequests,
-        })
+        setIsSubmitting(true)
+        setError(null)
+        setSuccess(false)
+
+        try {
+            const res = await fetch("/api/send-reservation-request", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    phone,
+                    checkInDate: formatDate(checkInDate!, '  dd/MM/yyyy'),
+                    checkOutDate: formatDate(checkOutDate!, 'dd/MM/yyyy'),
+                    adults: adultsCount,
+                    children: childrenCount,
+                    guestCount,
+                    roomSelections,
+                    nights,
+                    total: estimatedTotal,
+                    specialRequests,
+                }),
+            })
+
+            const data = await res.json()
+
+            if (!res.ok) {
+                throw new Error(data?.error || "Failed to send request")
+            }
+
+            setSuccess(true)
+
+            // optional: reset form
+            // reset everything if you want
+        } catch (err: any) {
+            setError(err.message)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -744,11 +768,24 @@ function MobileReservationEmail() {
                                     </div>
                                 </section>
 
+                                {success && (
+                                    <p className="text-sm text-green-600">
+                                        Request sent successfully. We’ll get back to you shortly.
+                                    </p>
+                                )}
+
+                                {error && (
+                                    <p className="text-sm text-red-600">
+                                        {error}
+                                    </p>
+                                )}
+
                                 <Button
                                     type="submit"
-                                    className="w-full rounded-full mb-6 bg-neutral-900 text-white hover:bg-black"
+                                    disabled={isSubmitting}
+                                    className="w-full rounded-full mb-6 bg-neutral-900 text-white hover:bg-black disabled:opacity-50"
                                 >
-                                    Send availability request
+                                    {isSubmitting ? "Sending..." : "Send availability request"}
                                 </Button>
                             </form>
                         </div>
