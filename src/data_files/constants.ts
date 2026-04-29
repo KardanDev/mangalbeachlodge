@@ -1,4 +1,4 @@
-import ogImageSrc from "@images/social.png";
+// import ogImageSrc from "@images/social.png";
 
 export const SITE = {
   title: "Mangal Beach Lodge",
@@ -37,7 +37,7 @@ export const OG = {
   url: SITE.url,
   title: `${SITE.title}: : ${SITE.tagline}`,
   description: SITE.description,
-  image: ogImageSrc,
+  // image: ogImageSrc,
 };
 
 export const partnersData = [

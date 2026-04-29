@@ -1,8 +1,6 @@
 ---
 import { getImage } from "astro:assets";
 import { OG, SEO, SITE } from "@data/constants";
-import faviconSvgSrc from "@images/icon.svg";
-import faviconSrc from "@images/icon.png";
 
 // Default properties for the Meta component. These values are used if props are not provided.
 // 'meta' sets a default description meta tag to describe the page content.
@@ -33,17 +31,15 @@ const ogDescription = customDescription || OG.description;
 // Define the metadata for your website and individual pages
 const siteURL = `${Astro.site}`; // Set the website URL in astro.config.mjs
 const author = SITE.author;
-const canonical = new URL(
-  Astro.url.pathname,
-  Astro.site || Astro.url.origin
-).href;
+const canonical = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
+  .href;
 const basePath = Astro.url.pathname;
-const socialImageRes = await getImage({
-  src: OG.image,
-  width: 1200,
-  height: 600,
-});
-const socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL of the image (https://stackoverflow.com/a/9858694)
+// const socialImageRes = await getImage({
+//   src: OG.image,
+//   width: 1200,
+//   height: 600,
+// });
+// const socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL of the image (https://stackoverflow.com/a/9858694)
 
 const languages: { [key: string]: string } = {
   en: "",
@@ -73,21 +69,23 @@ const alternateLanguageLinks: string = Object.entries(languages)
   .join("\n");
 
 // Generate and optimize the favicon images
-const faviconSvg = await getImage({
-  src: faviconSvgSrc,
-  format: "svg",
-});
+// const faviconSvg = await getImage({
+//   src: faviconSvgSrc,
+//   format: "svg",
+// });
 
-const appleTouchIcon = await getImage({
-  src: faviconSrc,
-  width: 180,
-  height: 180,
-  format: "png",
-});
+// const appleTouchIcon = await getImage({
+//   src: faviconSrc,
+//   width: 180,
+//   height: 180,
+//   format: "png",
+// });
 ---
 
-{/*  Inject structured data into the page if provided. This data is formatted as JSON-LD, a method recommended by Google for structured data pass:
-     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data */}{
+{
+  /*  Inject structured data into the page if provided. This data is formatted as JSON-LD, a method recommended by Google for structured data pass:
+     https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data */
+}{
   structuredData && (
     <script
       type="application/ld+json"
@@ -114,7 +112,7 @@ const appleTouchIcon = await getImage({
 <meta property="og:title" content={ogTitle} />
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:description" content={ogDescription} />
-<meta property="og:image" content={socialImage} />
+<!-- <meta property="og:image" content={socialImage} /> -->
 <meta content="1200" property="og:image:width" />
 <meta content="600" property="og:image:height" />
 <meta content="image/png" property="og:image:type" />
@@ -125,7 +123,7 @@ const appleTouchIcon = await getImage({
 <meta property="twitter:url" content={siteURL} />
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={ogDescription} />
-<meta name="twitter:image" content={socialImage} />
+<!-- <meta name="twitter:image" content={socialImage} /> -->
 
 {/* Links to the webmanifest and sitemap */}
 <link rel="manifest" href="/manifest.json" />

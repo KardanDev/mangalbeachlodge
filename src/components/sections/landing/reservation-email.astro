@@ -1,0 +1,25 @@
+---
+import MobileReservationEmail from "./mobile-reservation-email";
+---
+
+<aside
+    class="relative hidden min-h-[560px] overflow-hidden rounded-[1.6rem] border border-zinc-200/70 sm:min-h-[640px] lg:block dark:border-zinc-700"
+>
+    <img
+        src="/availability-form-bg.png"
+        alt="Turquoise water and shoreline at Mangal Beach Lodge"
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+    />
+    <div
+        class="absolute inset-0 bg-linear-to-t from-black/55 via-black/25 to-transparent"
+    >
+    </div>
+
+    <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+        <h2 class="text-4xl font-normal text-white">Ask for availability</h2>
+
+        <MobileReservationEmail client:only="react" />
+    </div>
+</aside>

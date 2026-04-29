@@ -1,11 +1,15 @@
+---
+import ReservationEmail from "./reservation-email.astro";
+import MobileReservationEmail from "./mobile-reservation-email";
+---
 
-<section class="pb-12 pt-8 md:pt-12 lg:pt-16">
+<section class="pt-8 pb-12 md:pt-12 lg:pt-16">
   <div
     class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:items-end"
   >
     <div>
       <h1
-        class="max-w-3xl text-balance text-5xl font-medium leading-[1.02] tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-6xl xl:text-7xl"
+        class="max-w-3xl text-5xl leading-[1.02] font-medium tracking-tight text-balance text-zinc-800 sm:text-6xl xl:text-7xl dark:text-zinc-100"
       >
         The Best Resort for
         <span class="block">best holiday in the</span>
@@ -15,13 +19,13 @@
       <img
         src="/mangal-entrance.png"
         alt="Mangal Beach Lodge entrance"
-        class="mt-7 h-20 w-full max-w-[290px] rounded-full object-cover sm:h-24 sm:max-w-[340px]"
+        class="mt-7 mr-20 ml-auto h-20 w-full max-w-[290px] rounded-full object-cover sm:h-24 sm:max-w-[340px] lg:mr-auto"
         loading="lazy"
         decoding="async"
       />
 
       <p
-        class="mt-6 max-w-2xl text-pretty text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 sm:text-base"
+        class="mt-6 max-w-md text-sm leading-relaxed text-pretty text-zinc-500 sm:max-w-xl sm:text-base dark:text-zinc-400"
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit aenean commodo
         ligula eget dolor. Cum sociis natoque penatibus et magnis dis parturient
@@ -29,7 +33,7 @@
       </p>
 
       <div
-        class="mt-10 flex flex-col gap-4 rounded-[1.75rem] bg-neutral-100 px-6 py-5 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100 sm:flex-row sm:items-center sm:justify-between"
+        class="mt-10 flex flex-col gap-4 rounded-[1.75rem] bg-neutral-100 px-6 py-5 text-zinc-900 sm:flex-row sm:items-center sm:justify-between dark:bg-zinc-900 dark:text-zinc-100"
       >
         <p class="text-lg font-semibold sm:text-2xl">
           * Vilankulos, Inhambane, Mozambique
@@ -52,100 +56,15 @@
               stroke="currentColor"
               stroke-width="1.6"
               stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+              stroke-linejoin="round"></path>
           </svg>
         </a>
       </div>
     </div>
 
-    <aside
-      class="relative min-h-[560px] overflow-hidden rounded-[1.6rem] border border-zinc-200/70 dark:border-zinc-700 sm:min-h-[640px]"
-    >
-      <img
-        src="/availability-form-bg.png"
-        alt="Turquoise water and shoreline at Mangal Beach Lodge"
-        class="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-        decoding="async"
-      />
-      <div
-        class="absolute inset-0 bg-linear-to-t from-black/55 via-black/25 to-transparent"
-      ></div>
-
-      <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-        <h2 class="text-4xl font-normal text-white">Ask for availability</h2>
-
-        <form action="#" method="post" class="mt-5 space-y-3" aria-label="Availability form">
-          <div class="grid gap-3 sm:grid-cols-2">
-            <div class="relative">
-              <label for="hero-date" class="sr-only">Select date</label>
-              <select
-                id="hero-date"
-                name="date"
-                class="h-10 w-full appearance-none rounded-full border-none bg-white px-4 pr-9 text-sm text-zinc-700 focus:outline-hidden focus:ring-2 focus:ring-white/70"
-              >
-                <option selected>Select date</option>
-              </select>
-              <svg
-                class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </div>
-
-            <div class="relative">
-              <label for="hero-type" class="sr-only">Select type</label>
-              <select
-                id="hero-type"
-                name="type"
-                class="h-10 w-full appearance-none rounded-full border-none bg-white px-4 pr-9 text-sm text-zinc-700 focus:outline-hidden focus:ring-2 focus:ring-white/70"
-              >
-                <option selected>Select type</option>
-              </select>
-              <svg
-                class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <div class="grid gap-3 sm:grid-cols-[1fr_auto]">
-            <div>
-              <label for="hero-email" class="sr-only">Email address</label>
-              <input
-                id="hero-email"
-                name="email"
-                type="email"
-                placeholder="Enter email address"
-                class="h-10 w-full rounded-full border-none bg-white px-4 text-sm text-zinc-700 placeholder:text-zinc-500 focus:outline-hidden focus:ring-2 focus:ring-white/70"
-              />
-            </div>
-
-            <button
-              type="submit"
-              class="h-10 rounded-full bg-zinc-900 px-10 text-sm font-semibold text-white transition-colors hover:bg-black"
-            >
-              Send
-            </button>
-          </div>
-        </form>
-      </div>
-    </aside>
+    <ReservationEmail />
+    <div class="block md:hidden">
+      <MobileReservationEmail client:only="react" />
+    </div>
   </div>
 </section>
