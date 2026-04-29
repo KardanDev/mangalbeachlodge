@@ -27,7 +27,11 @@ export default defineConfig({
   //     prefixDefaultLocale: false,
   //   },
   // },
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
   output: 'server',
   prefetch: true,
   integrations: [sitemap({
