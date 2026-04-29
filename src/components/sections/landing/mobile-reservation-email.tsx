@@ -162,14 +162,14 @@ function MobileReservationEmail() {
     const suggestedRoomLabel = ROOM_CONFIG[suggestedRoomType].label
     const suggestedCapacity = ROOM_CONFIG[suggestedRoomType].capacity
 
-    const extraAdultBeds =
-        roomType === "standard" ? Math.max(adultsCount - room.capacity, 0) : 0
+    // const extraAdultBeds =
+    //     roomType === "standard" ? Math.max(adultsCount - room.capacity, 0) : 0
 
-    const extraChildBeds = roomType === "standard" ? childrenCount : 0
+    // const extraChildBeds = roomType === "standard" ? childrenCount : 0
 
-    const extraBedCost =
-        extraAdultBeds * EXTRA_BED_RATES.adult +
-        extraChildBeds * EXTRA_BED_RATES.child
+    // const extraBedCost =
+    //     extraAdultBeds * EXTRA_BED_RATES.adult +
+    //     extraChildBeds * EXTRA_BED_RATES.child
 
     // const estimatedTotal = nightlyRate * nights + extraBedCost
 
@@ -748,14 +748,14 @@ function MobileReservationEmail() {
                                             </span>
                                         </div>
 
-                                        {extraBedCost > 0 && (
+                                        {/* {extraBedCost > 0 && (
                                             <div className="flex justify-between">
                                                 <span>Extra beds</span>
                                                 <span className="font-medium">
                                                     {formatMzn(extraBedCost)}
                                                 </span>
                                             </div>
-                                        )}
+                                        )} */}
 
                                         <div className="flex justify-between border-t border-neutral-200 pt-3">
                                             <span className="font-medium text-neutral-900">
@@ -782,7 +782,7 @@ function MobileReservationEmail() {
 
                                 <Button
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || needsMoreRooms}
                                     className="w-full rounded-full mb-6 bg-neutral-900 text-white hover:bg-black disabled:opacity-50"
                                 >
                                     {isSubmitting ? "Sending..." : "Send availability request"}
