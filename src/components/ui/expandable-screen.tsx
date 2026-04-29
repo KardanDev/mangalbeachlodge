@@ -156,7 +156,9 @@ export function ExpandableScreenContent({
   return (
     <AnimatePresence initial={false}>
       {isExpanded && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-2">
+        <div className="fixed inset-0  flex items-center justify-center p-3 sm:p-2" style={{
+          zIndex: 9999
+        }}>
           {/* Morphing background with shared layoutId */}
           <motion.div
             layoutId={layoutId}
@@ -171,7 +173,7 @@ export function ExpandableScreenContent({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.4 }}
-              className="relative z-20 w-full pb-6 "
+              className="relative  w-full pb-6 "
             >
               {children}
             </motion.div>

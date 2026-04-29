@@ -347,6 +347,7 @@ function MobileReservationEmail() {
 
             <ExpandableScreenContent className={cn(
                 "border  bg-neutral-50 text-neutral-800 shadow-lg dark:bg-neutral-200 dark:text-neutral-700 md:overflow-hidden",
+
             )}>
                 <div className="flex h-full w-full">
                     <div className="hidden lg:flex lg:w-1/2 relative">

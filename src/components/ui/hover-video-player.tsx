@@ -598,16 +598,25 @@ const HoverVideoPlayer: React.FC<HoverVideoPlayerProps> = ({
         )}
 
         {/* Thumbnail */}
+
+
+        {/* Overlays */}
+        {pausedOverlay && thumbnailSrc && (state.showThumbnail || !state.isInView) && (
+          <>
+
+            <HoverVideoPlayerPausedOverlay>
+              <HoverVideoPlayerThumbnail src={thumbnailSrc} />
+              {pausedOverlay}
+            </HoverVideoPlayerPausedOverlay>
+          </>
+
+        )}
+
+
         {thumbnailSrc && (state.showThumbnail || !state.isInView) && (
           <HoverVideoPlayerThumbnail src={thumbnailSrc} />
         )}
 
-        {/* Overlays */}
-        {pausedOverlay && (
-          <HoverVideoPlayerPausedOverlay>
-            {pausedOverlay}
-          </HoverVideoPlayerPausedOverlay>
-        )}
         {loadingOverlay && (
           <HoverVideoPlayerLoadingOverlay>
             {loadingOverlay}
@@ -840,7 +849,7 @@ const HoverVideoPlayerPausedOverlay: React.FC<{
     <AnimatePresence>
       {!isPlaying && !isLoading && !isHovering && (
         <motion.div
-          className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50"
+          className="absolute inset-0 z-10 flex items-center justify-center bg-opacity-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
