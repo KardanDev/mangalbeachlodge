@@ -12,14 +12,25 @@ import MobileReservationEmail from "./mobile-reservation-email";
         loading="lazy"
         decoding="async"
     />
-    <div
-        class="absolute inset-0 bg-linear-to-t from-black/55 via-black/25 to-transparent"
-    >
-    </div>
+    <div class="absolute inset-x-0 top-0 bottom-0 z-10 p-6 sm:p-8">
+        <div class="max-w-md space-y-4">
+            <p class="text-xs tracking-[0.2em] text-white/70 uppercase">
+                Mangal Beach Lodge
+            </p>
 
-    <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-        <h2 class="text-4xl font-normal text-white">Ask for availability</h2>
+            <h2
+                class="text-3xl leading-tight font-medium text-white sm:text-4xl"
+            >
+                Escape to the coast.
+            </h2>
 
-        <MobileReservationEmail client:only="react" />
+            <p class="text-sm text-white/80">
+                Check availability and plan your stay in seconds.
+            </p>
+        </div>
+
+        <div class="absolute inset-x-0 bottom-0 space-y-4 p-5 sm:p-7">
+            <MobileReservationEmail client:load />
+        </div>
     </div>
 </aside>
