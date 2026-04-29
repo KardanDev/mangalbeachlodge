@@ -1,6 +1,6 @@
 import React, {
   createContext,
-  ReactNode,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -8,7 +8,6 @@ import React, {
   useRef,
   useState,
 } from "react"
-import Image from "next/image"
 import { Maximize, Minimize, Pause, Play, Volume2, VolumeX } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 
@@ -88,7 +87,7 @@ interface VimeoPlayer {
 
 interface VimeoConstructor {
   Player: {
-    new (element: HTMLElement, options: any): VimeoPlayer
+    new(element: HTMLElement, options: any): VimeoPlayer
   }
 }
 
@@ -766,13 +765,14 @@ const HoverVideoPlayerThumbnail: React.FC<{ src: string }> = ({ src }) => {
         height: `calc(100% + ${cropTop + cropBottom}%)`,
       }}
     >
-      <Image
+      <img
         src={src}
         alt="Video thumbnail"
-        fill
+
+        // className="w-full"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover"
-        priority
+        className="object-cover w-full"
+
       />
     </div>
   )
