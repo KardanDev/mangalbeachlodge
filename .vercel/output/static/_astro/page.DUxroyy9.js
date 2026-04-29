@@ -1,1 +1,0 @@
-import{i}from"./index.FO_NAFrd.js";i();
