@@ -28,6 +28,7 @@ export default defineConfig({
   //   },
   // },
   adapter: vercel(),
+  output: 'server',
   prefetch: true,
   integrations: [sitemap({
     i18n: {
