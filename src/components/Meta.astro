@@ -130,6 +130,11 @@ const alternateLanguageLinks: string = Object.entries(languages)
 {/* https://docs.astro.build/en/guides/integrations-guide/sitemap/ */}
 <link rel="sitemap" href="/sitemap-index.xml" />
 
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; style-src 'self' 'unsafe-inline'; media-src 'self' https://res.cloudinary.com; img-src 'self' data: https://res.cloudinary.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel-insights.com;"
+/>
+
 {/* Links for favicons */}
 <!-- <link href="/favicon.ico" rel="icon" sizes="any" type="image/x-icon" /> -->
 <!-- <link href={faviconSvg.src} rel="icon" type="image/svg+xml" sizes="any" /> -->
