@@ -1,8 +1,7 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import HoverVideoPlayer from "@/components/ui/hover-video-player";
-import { Plus, Play, Loader2 } from "lucide-react";
-import tourVideo from '@images/videos/website-video.mp4'
+import { Play } from "lucide-react";
+import tourVideo from '@images/videos/web-video.mp4'
 
 const facilities = [
   { label: "Bar & Restaurant", active: false },
@@ -16,8 +15,8 @@ const facilities = [
 export default function FacilitiesSection() {
   return (
     <section className="py-14 md:py-20 lg:py-24">
-      <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-        <div className="group relative z-10 overflow-hidden rounded-xl border border-border shadow-sm">
+      <div className="grid z-0 items-center gap-8 md:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div className="group relative z-0  overflow-hidden rounded-xl border border-border shadow-sm">
           <HoverVideoPlayer
             videoSrc={tourVideo}
             thumbnailSrc='/couple-coast.jpg'
