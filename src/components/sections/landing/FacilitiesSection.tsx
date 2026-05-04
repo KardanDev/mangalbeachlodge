@@ -18,9 +18,8 @@ export default function FacilitiesSection() {
       <div className="grid z-0 items-center gap-8 md:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <div className="group relative z-0  overflow-hidden rounded-xl border border-border shadow-sm">
           <HoverVideoPlayer
-            videoSrc={'/videos/web-video.mp4'}
+            videoSrc={'/videos/website-video.mp4'}
             thumbnailSrc='/couple-coast.jpg'
-
 
             pausedOverlay={
               <div className="bg-neutral-50/50 backdrop-blur-2xl rounded-full p-2">
