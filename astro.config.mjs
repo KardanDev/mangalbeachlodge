@@ -15,8 +15,9 @@ export default defineConfig({
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   site: "https://www.mangal.co.mz",
   image: {
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "res.cloudinary.com"],
   },
+
   // i18n: {
   //   defaultLocale: "en",
   //   locales: ["en", "fr"],

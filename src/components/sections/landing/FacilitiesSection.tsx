@@ -21,6 +21,7 @@ export default function FacilitiesSection() {
             videoSrc='https://res.cloudinary.com/dlsbn4qfy/video/upload/v1777919730/website-video_a446pl.mp4'
             thumbnailSrc='/couple-coast.jpg'
 
+
             pausedOverlay={
               <div className="bg-neutral-50/50 backdrop-blur-2xl rounded-full p-2">
                 <Play className="size-10 fill-white text-white" />

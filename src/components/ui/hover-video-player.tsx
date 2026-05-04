@@ -307,6 +307,7 @@ const HoverVideoPlayer: React.FC<HoverVideoPlayerProps> = ({
     setState((prev) => ({
       ...prev,
       isPlaying: false,
+      isLoading: false,
       showThumbnail: true,
     }))
 
