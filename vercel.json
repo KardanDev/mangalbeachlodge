@@ -5,11 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; media-src 'self' https://res.cloudinary.com; img-src 'self' https://res.cloudinary.com data:; script-src 'self' 'unsafe-inline' https://vercel.live; style-src 'self' 'unsafe-inline';"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "script-src 'self' 'unsafe-inline' https://vercel.live https://*.vercel-insights.com"
+          "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'self'; media-src 'self' https://res.cloudinary.com; img-src 'self' data: https://images.unsplash.com https://res.cloudinary.com; script-src 'self' 'unsafe-inline' https://vercel.live https://*.vercel-insights.com; style-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; upgrade-insecure-requests; block-all-mixed-content"
         },
         {
           "key": "Content-Security-Policy",
