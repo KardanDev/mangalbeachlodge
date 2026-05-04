@@ -799,7 +799,7 @@ const HoverVideoPlayerControls: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <motion.div
-      className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent"
+      className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black to-transparent"
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: shouldShowControls ? 1 : 0,
