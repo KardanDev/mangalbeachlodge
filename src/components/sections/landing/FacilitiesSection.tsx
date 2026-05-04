@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import HoverVideoPlayer from "@/components/ui/hover-video-player";
-import { Play } from "lucide-react";
+import { Loader2, Play } from "lucide-react";
 // import tourVideo from '@images/videos/web-video.mp4'
 
 const facilities = [
@@ -18,7 +18,7 @@ export default function FacilitiesSection() {
       <div className="grid z-0 items-center gap-8 md:gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
         <div className="group relative z-0  overflow-hidden rounded-xl border border-border shadow-sm">
           <HoverVideoPlayer
-            videoSrc={'/videos/website-video.mp4'}
+            videoSrc='https://res.cloudinary.com/dlsbn4qfy/video/upload/v1777919730/website-video_a446pl.mp4'
             thumbnailSrc='/couple-coast.jpg'
 
             pausedOverlay={
@@ -26,7 +26,12 @@ export default function FacilitiesSection() {
                 <Play className="size-10 fill-white text-white" />
               </div>
             }
+            loadingOverlay={
+              <Loader2 className="animate-spin" />
+            }
             enableControls
+            preload="auto"
+
             style={{
               width: "100%",
               maxWidth: "100vw",
