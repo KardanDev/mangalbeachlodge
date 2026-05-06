@@ -3,7 +3,7 @@ const navBarLinks = [
   { name: "Quartos", url: "/pt#rooms" },
   { name: "Instalações", url: "/pt#facilities" },
   { name: "Sobre Nós", url: "/pt#about" },
-  { name: "Contato", url: "/pt#contact" },
+  // { name: "Contato", url: "/pt#contact" },
 ];
 
 export default {

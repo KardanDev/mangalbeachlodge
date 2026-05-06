@@ -337,6 +337,7 @@ function MobileReservationEmail() {
             layoutId="mobile-reservation-email"
             triggerRadius="999px"
             contentRadius="24px"
+
         >
             {/* Listens for external "open-reservation" events */}
             <ExternalTriggerListener
@@ -352,10 +353,10 @@ function MobileReservationEmail() {
             </div>
 
             <ExpandableScreenContent className={cn(
-                "border  bg-neutral-50 text-neutral-800 shadow-lg dark:bg-neutral-200 dark:text-neutral-700 md:overflow-hidden",
+                "border z-50! bg-neutral-50 text-neutral-800 shadow-lg dark:bg-neutral-200 dark:text-neutral-700 md:overflow-hidden",
 
             )}>
-                <div className="flex h-full w-full">
+                <div className="flex h-full w-full z-50">
                     <div className="hidden lg:flex lg:w-1/2 relative">
                         <div className="sticky top-0 h-screen w-full">
                             <img
