@@ -14,11 +14,11 @@ const homeUrl = Astro.currentLocale === "pt" ? "/pt" : "/";
 
 <!-- Main header component -->
 <header
-  class="sticky inset-x-0 top-4 z-10 flex w-full flex-wrap px-4 sm:px-6 md:flex-nowrap md:justify-start lg:px-8"
+  class="z-50 flex w-full flex-wrap md:sticky md:inset-x-0 md:top-4 md:flex-nowrap md:justify-start"
 >
   <!-- Navigation container -->
   <nav
-    class="relative mx-auto w-full max-w-[85rem] rounded-2xl border border-white/20 bg-white/80 py-3 shadow-lg backdrop-blur-xl md:flex md:items-center md:justify-between md:px-6 md:py-0"
+    class="relative mx-auto w-full bg-white py-2 md:max-w-[85rem] md:rounded-2xl md:border md:border-white/20 md:bg-white/80 md:py-0 md:shadow-lg md:backdrop-blur-xl md:flex md:items-center md:justify-between md:px-6"
     aria-label="Global"
   >
     <div class="flex items-center justify-between px-4 md:px-0">
@@ -31,7 +31,7 @@ const homeUrl = Astro.currentLocale === "pt" ? "/pt" : "/";
         <BrandLogo class="h-auto w-24" />
       </a>
       <!-- Collapse toggle for smaller screens -->
-      <div class="mr-5 ml-auto md:hidden">
+      <div class="ml-auto md:hidden">
         <button
           type="button"
           class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-neutral-200 disabled:pointer-events-none disabled:opacity-50"
@@ -40,7 +40,7 @@ const homeUrl = Astro.currentLocale === "pt" ? "/pt" : "/";
           aria-label="Toggle navigation"
         >
           <svg
-            class="hs-collapse-open:hidden h-[1.25rem] w-[1.25rem] shrink-0"
+            class="hs-collapse-open:hidden h-5 w-5 shrink-0"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -55,7 +55,7 @@ const homeUrl = Astro.currentLocale === "pt" ? "/pt" : "/";
             <line x1="3" x2="21" y1="18" y2="18"></line>
           </svg>
           <svg
-            class="hs-collapse-open:block hidden h-[1.25rem] w-[1.25rem] shrink-0"
+            class="hs-collapse-open:block hidden h-5 w-5 shrink-0"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -75,11 +75,11 @@ const homeUrl = Astro.currentLocale === "pt" ? "/pt" : "/";
     <!-- Contains navigation links -->
     <div
       id="navbar-collapse-with-animation"
-      class="hs-collapse relative hidden grow basis-full overflow-hidden transition-all duration-300 md:block md:overflow-visible"
+      class="hs-collapse relative hidden grow basis-full transition-all duration-300 md:block"
     >
       <!-- Navigation links container -->
       <div
-        class="mt-4 flex flex-col gap-y-1 rounded-xl bg-white/50 p-2 md:mt-0 md:flex-row md:items-center md:justify-end md:gap-x-6 md:bg-transparent md:p-0 md:ps-7"
+        class="mt-4 flex flex-col gap-y-1 bg-white p-4 md:mt-0 md:flex-row md:items-center md:justify-end md:gap-x-6 md:bg-transparent md:p-0 md:ps-7"
       >
         <!-- Navigation links and Authentication component -->
         {
