@@ -1,0 +1,503 @@
+import React, { useState, useCallback, useEffect } from "react";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
+import { AnimatePresence, motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  BedDouble,
+  Coffee,
+  Users,
+  Waves,
+  Sparkles,
+  Home,
+  UtensilsCrossed,
+  ShieldCheck,
+} from "lucide-react";
+
+/* ─── Room Data ─── */
+const rooms = [
+  {
+    id: "standard",
+    name: "Standard Room",
+    subtitle: "Quartos",
+    description:
+      "A cozy, beautifully appointed room with a thatched roof and artisan décor — the perfect retreat for couples or solo travellers seeking comfort by the coast.",
+    price: "5,000",
+    priceSuffix: "MZN / night",
+    priceNote: "Prices per night for 2 guests",
+    heroImage: "/standard_room.jpg",
+    gallery: ["/standard_room.jpg", "/larger_room.jpg"],
+    benefits: [
+      { icon: BedDouble, label: "Queen-size bed" },
+      { icon: Coffee, label: "Breakfast included option" },
+      { icon: Users, label: "Up to 2 guests" },
+      { icon: Waves, label: "Ocean-view terrace" },
+    ],
+    pricing: [
+      { season: "Low Season", withBreakfast: "6,500", without: "5,000" },
+      { season: "High Season", withBreakfast: "8,500", without: "7,000" },
+      { season: "Festive Season", withBreakfast: "12,500", without: "11,000" },
+    ],
+    extras: [
+      "Extra Adult Bed: 2,500 MZN",
+      "Extra Child Bed (5–12 yrs): 1,500 MZN",
+    ],
+    accentFrom: "from-amber-500/80",
+    accentTo: "to-orange-600/80",
+    badge: "Most Popular",
+  },
+  {
+    id: "house",
+    name: "Private House",
+    subtitle: "Casas",
+    description:
+      "A spacious private house with multiple bedrooms, perfect for families or groups wanting an intimate lodge experience with full privacy.",
+    price: "13,000",
+    priceSuffix: "MZN / night",
+    priceNote: "Sleeps up to 6 (4 in private rooms)",
+    heroImage: "/larger_room.jpg",
+    gallery: ["/larger_room.jpg", "/standard_room.jpg"],
+    benefits: [
+      { icon: Home, label: "Full private house" },
+      { icon: Users, label: "Up to 6 guests" },
+      { icon: UtensilsCrossed, label: "Self-catering kitchen" },
+      { icon: ShieldCheck, label: "Complete privacy" },
+    ],
+    pricing: [
+      { season: "Low Season", price: "13,000" },
+      { season: "High Season", price: "15,000" },
+      { season: "Festive Season", price: "25,000" },
+    ],
+    extras: ["Meals not included", "Type 2 house — sleeps 4 in private rooms"],
+    accentFrom: "from-emerald-600/80",
+    accentTo: "to-teal-700/80",
+    badge: "Best for Groups",
+  },
+];
+
+/* ─── How It Works Steps ─── */
+const steps = [
+  {
+    number: "01",
+    title: "Choose your room",
+    desc: "Browse our Standard Rooms or Private Houses and pick the best fit.",
+  },
+  {
+    number: "02",
+    title: "Send a reservation",
+    desc: "Fill out the enquiry form or email us with your preferred dates.",
+  },
+  {
+    number: "03",
+    title: "Enjoy your stay",
+    desc: "Arrive via our transfer service and let the beach-lodge magic begin.",
+  },
+];
+
+/* ════════════════════════════════════════════════════════════════════════ */
+/*  CAROUSEL MODAL                                                        */
+/* ════════════════════════════════════════════════════════════════════════ */
+/** Maps RoomsSection room IDs → MobileReservationEmail room types */
+const ROOM_TYPE_MAP: Record<string, string> = {
+  standard: "standard",
+  house: "villa",
+};
+
+interface ModalProps {
+  room: (typeof rooms)[0];
+  onClose: () => void;
+}
+
+function RoomModal({ room, onClose }: ModalProps) {
+  const handleReserve = useCallback(() => {
+    // 1. Close the gallery modal
+    onClose();
+    // 2. After a short delay (let exit animation finish), open the reservation form
+    setTimeout(() => {
+      window.dispatchEvent(
+        new CustomEvent("open-reservation", {
+          detail: { roomType: ROOM_TYPE_MAP[room.id] ?? "standard" },
+        }),
+      );
+    }, 350);
+  }, [onClose, room.id]);
+  const [current, setCurrent] = useState(0);
+  const total = room.gallery.length;
+
+  const prev = useCallback(
+    () => setCurrent((c) => (c - 1 + total) % total),
+    [total],
+  );
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % total),
+    [total],
+  );
+
+  /* keyboard nav */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose, prev, next]);
+
+  /* lock scroll */
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {/* backdrop */}
+      <motion.div
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
+
+      {/* panel */}
+      <motion.div
+        className="relative z-10 mx-4 flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row"
+        initial={{ scale: 0.92, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.92, opacity: 0, y: 30 }}
+        transition={{ type: "spring", stiffness: 260, damping: 24 }}
+      >
+        {/* close */}
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-md transition hover:bg-black/50"
+          aria-label="Close modal"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        {/* ─── LEFT: Carousel ─── */}
+        <div className="relative flex aspect-[4/3] w-full items-center justify-center bg-neutral-900 md:w-1/2">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={room.gallery[current]}
+              src={room.gallery[current]}
+              alt={`${room.name} photo ${current + 1}`}
+              className="absolute inset-0 h-full w-full object-cover"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.35 }}
+            />
+          </AnimatePresence>
+
+          {/* arrows */}
+          {total > 1 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition hover:bg-white/40"
+                aria-label="Previous photo"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition hover:bg-white/40"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </>
+          )}
+
+          {/* dots */}
+          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+            {room.gallery.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Go to photo ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  i === current
+                    ? "w-6 bg-white"
+                    : "w-2 bg-white/50 hover:bg-white/70"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ─── RIGHT: Details ─── */}
+        <div className="flex w-full flex-col gap-5 overflow-y-auto p-6 md:w-1/2 md:p-8">
+          <div>
+            <Badge
+              variant="secondary"
+              className="mb-2 text-xs text-muted-foreground"
+            >
+              {room.badge}
+            </Badge>
+            <h3 className="text-2xl font-semibold tracking-tight text-foreground">
+              {room.name}
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {room.description}
+            </p>
+          </div>
+
+          {/* Benefits */}
+          <div className="grid grid-cols-2 gap-3">
+            {room.benefits.map((b) => (
+              <div
+                key={b.label}
+                className="flex items-center gap-2 rounded-xl border border-border bg-neutral-50 px-3 py-2.5 text-sm text-foreground"
+              >
+                <b.icon className="h-4 w-4 shrink-0 text-amber-600" />
+                {b.label}
+              </div>
+            ))}
+          </div>
+
+          {/* Pricing table */}
+          <div className="rounded-xl border border-border bg-neutral-50 p-4">
+            <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Seasonal Pricing (MZN)
+            </h4>
+            <div className="space-y-2 text-sm">
+              {room.id === "standard"
+                ? room.pricing.map((p) => (
+                    <div
+                      key={p.season}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-foreground">{p.season}</span>
+                      <span className="font-medium text-foreground">
+                        {"withBreakfast" in p
+                          ? `${p.without} – ${p.withBreakfast}`
+                          : ""}
+                      </span>
+                    </div>
+                  ))
+                : room.pricing.map((p) => (
+                    <div
+                      key={p.season}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-foreground">{p.season}</span>
+                      <span className="font-medium text-foreground">
+                        {"price" in p ? p.price : ""}
+                      </span>
+                    </div>
+                  ))}
+            </div>
+          </div>
+
+          {/* Extras */}
+          <ul className="space-y-1 text-xs text-muted-foreground">
+            {room.extras.map((e) => (
+              <li key={e} className="flex items-start gap-1.5">
+                <Sparkles className="mt-0.5 h-3 w-3 shrink-0 text-amber-500" />
+                {e}
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA */}
+          <button
+            onClick={handleReserve}
+            className="mt-auto inline-flex items-center justify-center rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-[0.97]"
+          >
+            Reserve This Room
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════ */
+/*  ROOM CARD                                                             */
+/* ════════════════════════════════════════════════════════════════════════ */
+
+function RoomCard({
+  room,
+  onOpen,
+}: {
+  room: (typeof rooms)[0];
+  onOpen: () => void;
+}) {
+  return (
+    <CardContainer containerClassName="py-8 md:py-10">
+      <CardBody className="group/card relative h-auto w-full max-w-[520px] rounded-2xl border border-border bg-white p-5 shadow-sm transition-shadow hover:shadow-xl dark:bg-neutral-900">
+        {/* Image */}
+        <CardItem translateZ={50} className="w-full">
+          <div
+            className="relative cursor-pointer overflow-hidden rounded-xl"
+            onClick={onOpen}
+          >
+            <img
+              src={room.heroImage}
+              alt={room.name}
+              className="h-64 w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            {/* gradient overlay */}
+            <div
+              className={`absolute inset-0 bg-gradient-to-t ${room.accentFrom} ${room.accentTo} opacity-0 transition-opacity duration-300 group-hover/card:opacity-40`}
+            />
+            {/* badge */}
+            <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[0.7rem] font-semibold tracking-wide text-neutral-800 shadow backdrop-blur-md">
+              {room.badge}
+            </span>
+            {/* click hint */}
+            <span className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-xs font-medium text-white opacity-0 backdrop-blur-md transition-opacity group-hover/card:opacity-100">
+              <Sparkles className="h-3.5 w-3.5" />
+              View Gallery
+            </span>
+          </div>
+        </CardItem>
+
+        {/* Title + price */}
+        <CardItem translateZ={30} className="mt-5 w-full">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                {room.name}
+              </h3>
+              <p className="text-xs text-muted-foreground">{room.subtitle}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-lg font-bold text-foreground">{room.price}</p>
+              <p className="text-[0.65rem] text-muted-foreground">
+                {room.priceSuffix}
+              </p>
+            </div>
+          </div>
+        </CardItem>
+
+        {/* Description */}
+        <CardItem translateZ={20} className="mt-3 w-full">
+          <p className="text-sm leading-relaxed text-muted-foreground line-clamp-2">
+            {room.description}
+          </p>
+        </CardItem>
+
+        {/* Benefits pills */}
+        <CardItem translateZ={15} className="mt-4 w-full">
+          <div className="flex flex-wrap gap-2">
+            {room.benefits.map((b) => (
+              <span
+                key={b.label}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-neutral-50 px-3 py-1.5 text-xs text-foreground dark:bg-neutral-800"
+              >
+                <b.icon className="h-3.5 w-3.5 text-amber-600" />
+                {b.label}
+              </span>
+            ))}
+          </div>
+        </CardItem>
+
+        {/* CTA */}
+        <CardItem translateZ={40} className="mt-5 w-full">
+          <button
+            onClick={onOpen}
+            className="w-full rounded-xl bg-neutral-900 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-[0.98]"
+          >
+            Explore &amp; Book →
+          </button>
+        </CardItem>
+      </CardBody>
+    </CardContainer>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════════ */
+/*  SECTION                                                               */
+/* ════════════════════════════════════════════════════════════════════════ */
+
+export default function RoomsSection() {
+  const [openRoom, setOpenRoom] = useState<(typeof rooms)[0] | null>(null);
+
+  return (
+    <section id="rooms" className="py-16 md:py-24">
+      {/* ─── Header ─── */}
+      <div className="mx-auto mb-4 max-w-2xl text-center">
+        <Badge variant="secondary" className="mb-4 text-muted-foreground">
+          <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+          Our Accommodations
+        </Badge>
+        <h2 className="font-heading text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          Choose Your Perfect Stay
+        </h2>
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          From intimate rooms to spacious private houses — find the ideal
+          getaway at Mangal Beach Lodge, right on the coast of Inhambane.
+        </p>
+      </div>
+
+      {/* ─── Cards grid ─── */}
+      <div className="mx-auto grid max-w-5xl gap-2 md:grid-cols-2">
+        {rooms.map((room) => (
+          <RoomCard
+            key={room.id}
+            room={room}
+            onOpen={() => setOpenRoom(room)}
+          />
+        ))}
+      </div>
+
+      {/* ─── How It Works ─── */}
+      <div className="mx-auto mt-16 max-w-4xl">
+        <h3 className="mb-8 text-center text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+          How It Works
+        </h3>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {steps.map((s) => (
+            <div
+              key={s.number}
+              className="group relative rounded-2xl border border-border bg-white p-6 transition-shadow hover:shadow-lg dark:bg-neutral-900"
+            >
+              <span className="mb-3 block font-heading text-3xl font-bold text-amber-500/30">
+                {s.number}
+              </span>
+              <h4 className="text-sm font-semibold text-foreground">
+                {s.title}
+              </h4>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                {s.desc}
+              </p>
+              {/* decorative line */}
+              <div className="absolute -bottom-px left-6 right-6 h-[2px] rounded-full bg-amber-400 opacity-0 transition-opacity group-hover:opacity-100" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ─── Transfer note ─── */}
+      <p className="mx-auto mt-10 max-w-md text-center text-xs text-muted-foreground">
+        Transfer service available at 2,500 MZN per trip (max 4 guests).
+        <br />
+        All prices in Mozambican Metical (MZN) per night.
+      </p>
+
+      {/* ─── Modal ─── */}
+      <AnimatePresence>
+        {openRoom && (
+          <RoomModal room={openRoom} onClose={() => setOpenRoom(null)} />
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}

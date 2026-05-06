@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useMemo, useState } from "react"
+import { useCallback, useId, useMemo, useState, useEffect as useEffectReact } from "react"
 import { differenceInCalendarDays, format, formatDate } from "date-fns"
 import { CalendarIcon, ChevronDownIcon } from "lucide-react"
 
@@ -25,6 +25,7 @@ import {
     ExpandableScreen,
     ExpandableScreenContent,
     ExpandableScreenTrigger,
+    useExpandableScreen,
 } from "@/components/ui/expandable-screen"
 import BrandLogo from "@/components/BrandLogo.astro"
 import { cn } from "@/lib/utils"
@@ -337,6 +338,11 @@ function MobileReservationEmail() {
             triggerRadius="999px"
             contentRadius="24px"
         >
+            {/* Listens for external "open-reservation" events */}
+            <ExternalTriggerListener
+                onRoomTypeChange={setRoomType}
+                onRoomSelectionsReset={setRoomSelections}
+            />
             <div className="w-full ">
                 <ExpandableScreenTrigger>
                     <Button size="lg" className="w-full rounded-full">
@@ -353,7 +359,7 @@ function MobileReservationEmail() {
                     <div className="hidden lg:flex lg:w-1/2 relative">
                         <div className="sticky top-0 h-screen w-full">
                             <img
-                                src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210f9?q=80&w=1400&auto=format&fit=crop"
+                                src="/reserve_now_coast.jpeg"
                                 alt="Resort"
                                 className="h-full w-full object-cover"
                             />
@@ -362,8 +368,8 @@ function MobileReservationEmail() {
                             <div className="absolute inset-0 bg-black/20" />
 
                             {/* optional text overlay */}
-                            <div className="absolute bottom-6 left-6 text-white">
-                                <p className="text-sm opacity-80">Mangal Beach Lodge</p>
+                            <div className="absolute bottom-6 left-6 text-neutral-900">
+                                <p className="text-sm font-bold">Mangal Beach Lodge</p>
                                 <p className="text-xl font-medium">Your coastal escape</p>
                             </div>
                         </div>
@@ -795,6 +801,40 @@ function MobileReservationEmail() {
             </ExpandableScreenContent>
         </ExpandableScreen>
     )
+}
+
+/**
+ * Inner component that lives inside the ExpandableScreen context.
+ * Listens for the custom DOM event "open-reservation" and programmatically
+ * expands the reservation form, optionally pre-selecting a room type.
+ */
+function ExternalTriggerListener({
+    onRoomTypeChange,
+    onRoomSelectionsReset,
+}: {
+    onRoomTypeChange: (type: RoomType) => void
+    onRoomSelectionsReset: (selections: RoomSelection[]) => void
+}) {
+    const { expand } = useExpandableScreen()
+
+    useEffectReact(() => {
+        const handler = (e: Event) => {
+            const detail = (e as CustomEvent).detail
+            if (detail?.roomType) {
+                const rt = detail.roomType as RoomType
+                onRoomTypeChange(rt)
+                // Reset the room selections array so the radio buttons match
+                onRoomSelectionsReset([
+                    { type: rt, extraAdults: 0, extraChildren: 0 },
+                ])
+            }
+            expand()
+        }
+        window.addEventListener("open-reservation", handler)
+        return () => window.removeEventListener("open-reservation", handler)
+    }, [expand, onRoomTypeChange, onRoomSelectionsReset])
+
+    return null
 }
 
 export default MobileReservationEmail

@@ -3,11 +3,13 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import HeroSection from "@components/sections/landing/HeroSection.astro";
 import FacilitiesSection from "@components/sections/landing/FacilitiesSection.tsx";
+import RoomsSection from "@components/sections/landing/RoomsSection.tsx";
 ---
 
 <MainLayout>
   <HeroSection />
   <FacilitiesSection client:visible />
+  <RoomsSection client:visible />
   <!-- <AnnouncementBanner
     btnId="dismiss-button"
     btnTitle="Explore ScrewFast on GitHub"
