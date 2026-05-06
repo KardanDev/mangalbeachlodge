@@ -138,6 +138,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -156,9 +157,11 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
@@ -281,7 +284,12 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
+}
+
+* {
+  scroll-behavior: smooth;
 }

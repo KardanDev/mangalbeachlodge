@@ -9,18 +9,20 @@ const t = {
     title1: "Premium beach lodging",
     title2: "in Inhambane,",
     title3: "Mozambique.",
-    description: "Experience authentic Mozambican warmth right by the ocean in Vilankulos. Nestled in the Bazaruto Archipelago, Mangal Beach Lodge offers pristine white sands, crystal clear waters, and memories that will last a lifetime.",
+    description:
+      "Experience authentic Mozambican warmth right by the ocean in Vilankulos. Nestled in the Bazaruto Archipelago, Mangal Beach Lodge offers pristine white sands, crystal clear waters, and memories that will last a lifetime.",
     location: "* Vilankulos, Inhambane, Mozambique",
-    seeDirection: "See direction"
+    seeDirection: "See direction",
   },
   pt: {
     title1: "Alojamento de praia premium",
     title2: "em Inhambane,",
     title3: "Moçambique.",
-    description: "Experimente a autêntica hospitalidade moçambicana junto ao oceano em Vilankulos. Situado no Arquipélago de Bazaruto, o Mangal Beach Lodge oferece areias brancas imaculadas, águas cristalinas e memórias que durarão para sempre.",
+    description:
+      "Experimente a autêntica hospitalidade moçambicana junto ao oceano em Vilankulos. Situado no Arquipélago de Bazaruto, o Mangal Beach Lodge oferece areias brancas imaculadas, águas cristalinas e memórias que durarão para sempre.",
     location: "* Vilankulos, Inhambane, Moçambique",
-    seeDirection: "Ver direções"
-  }
+    seeDirection: "Ver direções",
+  },
 }[lang as "en" | "pt"];
 ---
 
@@ -40,7 +42,7 @@ const t = {
       <img
         src="/mangal-entrance.png"
         alt="Mangal Beach Lodge entrance"
-        class="mt-7 mr-20 ml-auto h-20 w-full max-w-[290px] rounded-full object-cover sm:h-24 sm:max-w-[340px] lg:mr-auto shadow-md"
+        class="mt-7 mr-20 ml-auto h-20 w-full max-w-[290px] rounded-full object-cover shadow-md sm:h-24 sm:max-w-[340px] lg:mr-auto"
         loading="lazy"
         decoding="async"
       />
@@ -59,9 +61,7 @@ const t = {
         </p>
 
         <a
-          href="https://maps.app.goo.gl/YVw1P6B42K5BtzD66"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#footer"
           class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-amber-600"
         >
           {t.seeDirection}
