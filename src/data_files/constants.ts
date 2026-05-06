@@ -1,14 +1,14 @@
 // import ogImageSrc from "@images/social.png";
 
 export const SITE = {
-  title: "Mangal Beach Lodge",
-  tagline: "Top-quality Beach Accommodation",
+  title: "Mangal Beach Lodge | Premium Beach Lodging in Mozambique",
+  tagline: "Exclusive Beachfront Accommodation in Vilankulos, Inhambane",
   description:
-    "Mangal Beach Lodge offers top-tier beach accommodation and expert hospitality services to meet all your project needs. Start exploring and contact our sales team for superior quality and reliability.",
+    "Discover Mangal Beach Lodge, the ultimate beach lodging in Vilankulos, Inhambane, Mozambique. Experience pristine shores, the crystal clear waters of the Bazaruto Archipelago, and authentic Mozambican hospitality. Book your beachfront getaway today.",
   description_short:
-    "Mangal Beach Lodge offers top-tier beach accommodation and expert hospitality services to meet all your project needs.",
+    "Premium beach lodging in Vilankulos, Inhambane, Mozambique. Experience pristine shores and authentic Mozambican hospitality at Mangal Beach Lodge.",
   url: "https://www.mangal.co.mz",
-  author: "Danniell Kruger",
+  author: "Mangal Beach Lodge",
 };
 
 export const SEO = {
@@ -16,12 +16,28 @@ export const SEO = {
   description: SITE.description,
   structuredData: {
     "@context": "https://schema.org",
-    "@type": "WebPage",
+    "@type": "Resort",
     inLanguage: "en-US",
     "@id": SITE.url,
     url: SITE.url,
     name: SITE.title,
     description: SITE.description,
+    image: `${SITE.url}/social.png`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Mangal Beach 1942",
+      addressLocality: "Vilanculos",
+      addressRegion: "Inhambane",
+      addressCountry: "MZ"
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -22.069866,
+      longitude: 35.323660
+    },
+    telephone: "+258846890382",
+    email: "management@mangal.co.mz",
+    priceRange: "$$",
     isPartOf: {
       "@type": "WebSite",
       url: SITE.url,
@@ -35,7 +51,7 @@ export const OG = {
   locale: "en_US",
   type: "website",
   url: SITE.url,
-  title: `${SITE.title}: : ${SITE.tagline}`,
+  title: `${SITE.title} - ${SITE.tagline}`,
   description: SITE.description,
   // image: ogImageSrc,
 };

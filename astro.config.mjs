@@ -15,19 +15,16 @@ export default defineConfig({
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   site: "https://www.mangal.co.mz",
   image: {
-    domains: ["images.unsplash.com", "res.cloudinary.com"],
+    domains: ["images.unsplash.com", "res.cloudinary.com", "maps.google.com", "google.com"],
   },
 
-  // i18n: {
-  //   defaultLocale: "en",
-  //   locales: ["en", "fr"],
-  //   fallback: {
-  //     fr: "en",
-  //   },
-  //   routing: {
-  //     prefixDefaultLocale: false,
-  //   },
-  // },
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "pt"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   adapter: vercel({
     imageService: true,
     webAnalytics: {
@@ -41,7 +38,7 @@ export default defineConfig({
       defaultLocale: "en", // All urls that don't contain language prefix will be treated as default locale
       locales: {
         en: "en", // The `defaultLocale` value must present in `locales` keys
-        fr: "fr",
+        pt: "pt",
       },
     },
   }), starlight({
@@ -51,18 +48,6 @@ export default defineConfig({
     // If only a Starlight i18n configuration is provided, an equivalent Astro i18n configuration is generated/used.
     // If only an Astro i18n configuration is provided, the Starlight i18n configuration is updated to match it.
     // If both an Astro and Starlight i18n configurations are provided, an error is thrown.
-    locales: {
-      root: {
-        label: "English",
-        lang: "en",
-      },
-      de: { label: "Deutsch", lang: "de" },
-      es: { label: "Español", lang: "es" },
-      fa: { label: "Persian", lang: "fa", dir: "rtl" },
-      fr: { label: "Français", lang: "fr" },
-      ja: { label: "日本語", lang: "ja" },
-      "zh-cn": { label: "简体中文", lang: "zh-CN" },
-    },
     // https://starlight.astro.build/guides/sidebar/
     // sidebar: [
     //   {

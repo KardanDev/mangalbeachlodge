@@ -1,23 +1,38 @@
-
 ---
-
-import { SITE_CONFIG } from "@/utils/site-info";
 import WhatsappIcon from '../../ui/icons/WhatsappIcon.astro'
+import { Mail, Phone } from "lucide-react";
 
+const lang = Astro.currentLocale || "en";
+const t = {
+  en: {
+    reservations: "Online reservations available 24/7",
+    whatsapp: "WhatsApp Us",
+  },
+  pt: {
+    reservations: "Reservas online disponíveis 24/7",
+    whatsapp: "Fale no WhatsApp",
+  }
+}[lang as "en" | "pt"];
 ---
 
-<div class="my-4 hidden md:flex w-full items-center justify-between px-6 bg-gray-100 dark:bg-neutral-700 py-1 rounded-3xl text-sm text-neutral-700 dark:text-neutral-300 z-20">
-    <!-- Call for reservation -->
-     <div class=""><p>Call us for a reservation: <span>{SITE_CONFIG.reservationContact}</span> </p></div>
+<div class="hidden w-full items-center justify-between bg-amber-50/60 backdrop-blur-md border-b border-amber-100/50 px-6 py-2.5 text-xs font-medium tracking-wide text-neutral-600 md:flex">
+    <div class="flex items-center gap-6">
+        <a href="mailto:management@mangal.co.mz" class="flex items-center gap-2 transition hover:text-amber-700">
+            <svg class="h-3.5 w-3.5 text-amber-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            management@mangal.co.mz
+        </a>
+        <a href="tel:+258846890382" class="flex items-center gap-2 transition hover:text-amber-700">
+            <svg class="h-3.5 w-3.5 text-amber-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +258 84 689 0382
+        </a>
+    </div>
 
-    <!-- Reservation times -->
-     <div class="">
-        <p>Online reservations are only available during our business hours: <span class="underline">All days ({SITE_CONFIG.reservationHours})</span></p>
-     </div>
-
-    <!-- Whatsapp icon and get in touch -->
-     <div class="flex items-center gap-2">
-        <p class="flex items-center">Get in touch! </p>
+    <div class="flex items-center gap-4">
+        <p>{t.reservations}</p>
+        <div class="h-3 w-px bg-neutral-300"></div>
+        <a href="https://wa.me/258846890382" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 transition hover:text-[#25D366]">
+            <span>{t.whatsapp}</span>
             <WhatsappIcon /> 
-     </div>
+        </a>
+    </div>
 </div>

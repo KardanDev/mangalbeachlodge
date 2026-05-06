@@ -1,0 +1,20 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import FacilitiesSection from "@components/sections/landing/FacilitiesSection.tsx";
+import RoomsSection from "@components/sections/landing/RoomsSection.tsx";
+import AboutSection from "@components/sections/landing/AboutSection.tsx";
+import FAQSection from "@components/sections/landing/FAQSection.tsx";
+
+const title = "Mangal Beach Lodge | Alojamento de Praia em Vilankulos, Moçambique";
+const description = "Experimente a autêntica hospitalidade moçambicana junto ao oceano em Vilankulos. Situado no Arquipélago de Bazaruto, o Mangal Beach Lodge oferece areias brancas imaculadas e águas cristalinas. Reserve hoje.";
+---
+
+<MainLayout lang="pt" title={title} customDescription={description}>
+  <HeroSection />
+  <FacilitiesSection lang="pt" client:visible />
+  <RoomsSection lang="pt" client:visible />
+  <AboutSection lang="pt" client:visible />
+  <FAQSection lang="pt" client:visible />
+</MainLayout>

@@ -1,19 +1,17 @@
 ---
-import { languages } from "@utils//ui";
+import { languages } from "@utils/ui";
 import Icon from "./icons/Icon.astro";
 ---
 
-<div class="hs-dropdown relative inline-flex">
-  <button
-    id="hs-dropdown-default"
-    type="button"
+<details class="group relative inline-flex" id="lang-picker">
+  <summary
     aria-label="Change language"
     title="Change language"
-    class="hs-dropdown-toggle inline-flex items-center gap-x-2 rounded-lg px-1.5 py-1.5 text-sm font-medium text-neutral-600 outline-hidden ring-zinc-500 transition duration-300 hover:bg-neutral-200 hover:text-amber-700 dark:border-neutral-700 dark:text-neutral-400 dark:ring-zinc-200 dark:hover:bg-neutral-700 dark:hover:text-amber-300 dark:focus:outline-hidden"
+    class="inline-flex cursor-pointer items-center gap-x-2 rounded-lg px-1.5 py-1.5 text-sm font-medium text-neutral-600 outline-hidden ring-zinc-500 transition duration-300 hover:bg-neutral-200 hover:text-amber-700 list-none [&::-webkit-details-marker]:hidden"
   >
     <Icon name="earth" />
     <svg
-      class="size-4 hs-dropdown-open:rotate-180"
+      class="size-4 transition-transform group-open:rotate-180"
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -23,48 +21,54 @@ import Icon from "./icons/Icon.astro";
       stroke-linecap="round"
       stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
     >
-  </button>
+  </summary>
 
   <div
-    class="hs-dropdown-menu absolute left-0 top-full mt-2 hidden rounded-lg bg-neutral-50 p-2 opacity-0 shadow-md transition-[opacity,margin] before:absolute before:-top-4 before:start-0 before:h-4 before:w-full after:absolute after:-bottom-4 after:start-0 after:h-4 after:w-full hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:border dark:border-neutral-700 dark:bg-neutral-800 z-10"
-    aria-labelledby="hs-dropdown-default"
+    class="absolute left-0 top-full mt-2 rounded-lg bg-neutral-50 p-2 shadow-md z-10 border border-neutral-200"
   >
     {
       // Map through the list of languages, creating a link for each language
       Object.entries(languages).map(([lang, label]) => (
         <a
-          class="flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-hidden dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          class="flex items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-hidden lang-link"
           href={`/${lang === "en" ? "" : lang}`}
+          data-lang={lang}
         >
-          {label}
+          {label as string}
         </a>
       ))
     }
   </div>
-</div>
+</details>
 
 <script>
   // Type alias for supported languages
-  type TLanguage = "en" | "fr";
-  // array of supported languages
-  const languages: TLanguage[] = ["en", "fr"];
+  type TLanguage = "en" | "pt";
+  const languages: TLanguage[] = ["en", "pt"];
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Only target language picker links
-    const languageLinks = document.querySelectorAll(".hs-dropdown-menu[aria-labelledby='hs-dropdown-default'] a");
+  function initLanguagePicker() {
+    const languageLinks = document.querySelectorAll(".lang-link");
+    const details = document.getElementById('lang-picker') as HTMLDetailsElement;
     
+    // Close dropdown on outside click
+    document.addEventListener('click', (e) => {
+      if (details && !details.contains(e.target as Node)) {
+        details.removeAttribute('open');
+      }
+    });
+
     languageLinks.forEach((element) => {
-      const link = element as HTMLAnchorElement;
-      const lang = link
-        .getAttribute("href")
-        ?.replace("/", "")
-        .replace("/", "") as TLanguage;
+      // Create clone to remove existing event listeners
+      const newElement = element.cloneNode(true);
+      element.parentNode?.replaceChild(newElement, element);
+      
+      const link = newElement as HTMLAnchorElement;
+      const lang = link.getAttribute("data-lang") as TLanguage;
 
       link.addEventListener("click", function (event) {
         event.preventDefault();
 
         const url = new URL(window.location.href);
-        
         const currentPath = url.pathname
           .split("/")
           .filter((part) => part && !languages.includes(part as TLanguage))
@@ -83,5 +87,9 @@ import Icon from "./icons/Icon.astro";
         window.location.href = `${url.origin}${newPath}${url.search}`;
       });
     });
-  });
+  }
+
+  document.addEventListener("DOMContentLoaded", initLanguagePicker);
+  document.addEventListener("astro:page-load", initLanguagePicker);
+  initLanguagePicker();
 </script>

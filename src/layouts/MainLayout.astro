@@ -45,24 +45,22 @@ interface Props {
     />
     {/* Define the title of the page */}
     <title>{title}</title>
-    <script is:inline>
-  document.documentElement.classList.remove("dark");
-  localStorage.setItem("hs_theme", "light");
-</script>
     <script>
       import "@scripts/lenisSmoothScroll.js";
     </script>
   </head>
   <body
     class:list={[
-      "flex min-h-screen flex-col bg-neutral-50 selection:bg-amber-400 selection:text-neutral-700 dark:bg-neutral-800",
+      "flex min-h-screen flex-col bg-neutral-50 selection:bg-amber-400 selection:text-neutral-700",
       bodyClass,
     ]}
   >
-    {/*
+    {
+      /*
     Setting up the main structure of the page.
     The Navbar is placed at the top, with a slot for the main content and FooterSection at the bottom.
-    */}
+    */
+    }
     <div
       class:list={[
         "w-full flex-grow",
@@ -76,8 +74,7 @@ interface Props {
           <>
             <TopBar />
             <Navbar />
-            <!-- Separator -->
-            <div class="my-4 border-t border-neutral-300 px-2 dark:border-neutral-700"></div>
+            {/* <div class="my-4 border-t border-neutral-300 px-2"></div> */}
           </>
         )
       }
@@ -85,7 +82,7 @@ interface Props {
         <slot />
       </main>
     </div>
-    <!-- <FooterSection /> -->
+    <FooterSection />
     <script>
       // https://preline.co
       import "preline";

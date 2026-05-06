@@ -1,6 +1,27 @@
 ---
 import ReservationEmail from "./reservation-email.astro";
 import MobileReservationEmail from "./mobile-reservation-email";
+
+const lang = Astro.currentLocale || "en";
+
+const t = {
+  en: {
+    title1: "Premium beach lodging",
+    title2: "in Inhambane,",
+    title3: "Mozambique.",
+    description: "Experience authentic Mozambican warmth right by the ocean in Vilankulos. Nestled in the Bazaruto Archipelago, Mangal Beach Lodge offers pristine white sands, crystal clear waters, and memories that will last a lifetime.",
+    location: "* Vilankulos, Inhambane, Mozambique",
+    seeDirection: "See direction"
+  },
+  pt: {
+    title1: "Alojamento de praia premium",
+    title2: "em Inhambane,",
+    title3: "Moçambique.",
+    description: "Experimente a autêntica hospitalidade moçambicana junto ao oceano em Vilankulos. Situado no Arquipélago de Bazaruto, o Mangal Beach Lodge oferece areias brancas imaculadas, águas cristalinas e memórias que durarão para sempre.",
+    location: "* Vilankulos, Inhambane, Moçambique",
+    seeDirection: "Ver direções"
+  }
+}[lang as "en" | "pt"];
 ---
 
 <section class="pt-8 pb-12 md:pt-12 lg:pt-16">
@@ -9,41 +30,41 @@ import MobileReservationEmail from "./mobile-reservation-email";
   >
     <div>
       <h1
-        class="max-w-3xl text-5xl leading-[1.02] font-medium tracking-tight text-balance text-zinc-800 sm:text-6xl xl:text-7xl dark:text-zinc-100"
+        class="max-w-3xl text-5xl leading-[1.02] font-medium tracking-tight text-balance text-zinc-800 sm:text-6xl xl:text-7xl"
       >
-        The Best Resort for
-        <span class="block">best holiday in the</span>
-        <span class="block">Inhambane</span>
+        {t.title1}
+        <span class="block text-amber-600">{t.title2}</span>
+        <span class="block">{t.title3}</span>
       </h1>
 
       <img
         src="/mangal-entrance.png"
         alt="Mangal Beach Lodge entrance"
-        class="mt-7 mr-20 ml-auto h-20 w-full max-w-[290px] rounded-full object-cover sm:h-24 sm:max-w-[340px] lg:mr-auto"
+        class="mt-7 mr-20 ml-auto h-20 w-full max-w-[290px] rounded-full object-cover sm:h-24 sm:max-w-[340px] lg:mr-auto shadow-md"
         loading="lazy"
         decoding="async"
       />
 
       <p
-        class="mt-6 max-w-md text-sm leading-relaxed text-pretty text-zinc-500 sm:max-w-xl sm:text-base dark:text-zinc-400"
+        class="mt-6 max-w-md text-sm leading-relaxed text-pretty text-zinc-600 sm:max-w-xl sm:text-base"
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit aenean commodo
-        ligula eget dolor. Cum sociis natoque penatibus et magnis dis parturient
-        montes, nascetur ridiculus mus donec.
+        {t.description}
       </p>
 
       <div
-        class="mt-10 flex flex-col gap-4 rounded-[1.75rem] bg-neutral-100 px-6 py-5 text-zinc-900 sm:flex-row sm:items-center sm:justify-between dark:bg-zinc-900 dark:text-zinc-100"
+        class="mt-10 flex flex-col gap-4 rounded-[1.75rem] bg-neutral-100 px-6 py-5 text-zinc-900 sm:flex-row sm:items-center sm:justify-between"
       >
-        <p class="text-lg font-semibold sm:text-2xl">
-          * Vilankulos, Inhambane, Mozambique
+        <p class="text-lg font-semibold sm:text-xl">
+          {t.location}
         </p>
 
         <a
-          href="#"
-          class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+          href="https://maps.app.goo.gl/YVw1P6B42K5BtzD66"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-amber-600"
         >
-          See direction
+          {t.seeDirection}
           <svg
             class="h-4 w-4"
             viewBox="0 0 20 20"

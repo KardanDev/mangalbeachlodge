@@ -17,82 +17,82 @@ import {
 } from "lucide-react";
 
 /* ─── Room Data ─── */
-const rooms = [
+const getRooms = (lang: "en" | "pt") => [
   {
     id: "standard",
-    name: "Standard Room",
+    name: lang === "pt" ? "Quarto Standard" : "Standard Room",
     subtitle: "Quartos",
     description:
-      "A cozy, beautifully appointed room with a thatched roof and artisan décor — the perfect retreat for couples or solo travellers seeking comfort by the coast.",
+      lang === "pt" ? "Um quarto aconchegante e bem equipado com teto de palha e decoração artesanal — o refúgio perfeito para casais ou viajantes individuais." : "A cozy, beautifully appointed room with a thatched roof and artisan décor — the perfect retreat for couples or solo travellers seeking comfort by the coast.",
     price: "5,000",
     priceSuffix: "MZN / night",
-    priceNote: "Prices per night for 2 guests",
+    priceNote: lang === "pt" ? "Preços por noite para 2 hóspedes" : "Prices per night for 2 guests",
     heroImage: "/standard_room.jpg",
     gallery: ["/standard_room.jpg", "/larger_room.jpg"],
     benefits: [
-      { icon: BedDouble, label: "Queen-size bed" },
-      { icon: Coffee, label: "Breakfast included option" },
-      { icon: Users, label: "Up to 2 guests" },
-      { icon: Waves, label: "Ocean-view terrace" },
+      { icon: BedDouble, label: lang === "pt" ? "Cama Queen-size" : "Queen-size bed" },
+      { icon: Coffee, label: lang === "pt" ? "Opção de pequeno-almoço" : "Breakfast included option" },
+      { icon: Users, label: lang === "pt" ? "Até 2 hóspedes" : "Up to 2 guests" },
+      { icon: Waves, label: lang === "pt" ? "Terraço com vista para o mar" : "Ocean-view terrace" },
     ],
     pricing: [
-      { season: "Low Season", withBreakfast: "6,500", without: "5,000" },
-      { season: "High Season", withBreakfast: "8,500", without: "7,000" },
-      { season: "Festive Season", withBreakfast: "12,500", without: "11,000" },
+      { season: lang === "pt" ? "Baixa Temporada" : "Low Season", withBreakfast: "6,500", without: "5,000" },
+      { season: lang === "pt" ? "Alta Temporada" : "High Season", withBreakfast: "8,500", without: "7,000" },
+      { season: lang === "pt" ? "Época Festiva" : "Festive Season", withBreakfast: "12,500", without: "11,000" },
     ],
     extras: [
-      "Extra Adult Bed: 2,500 MZN",
-      "Extra Child Bed (5–12 yrs): 1,500 MZN",
+      lang === "pt" ? "Cama Extra Adulto: 2,500 MZN" : "Extra Adult Bed: 2,500 MZN",
+      lang === "pt" ? "Cama Extra Criança (5–12 anos): 1,500 MZN" : "Extra Child Bed (5–12 yrs): 1,500 MZN",
     ],
     accentFrom: "from-amber-500/80",
     accentTo: "to-orange-600/80",
-    badge: "Most Popular",
+    badge: lang === "pt" ? "Mais Popular" : "Most Popular",
   },
   {
     id: "house",
-    name: "Private House",
+    name: lang === "pt" ? "Casa Privada" : "Private House",
     subtitle: "Casas",
     description:
-      "A spacious private house with multiple bedrooms, perfect for families or groups wanting an intimate lodge experience with full privacy.",
+      lang === "pt" ? "Uma casa espaçosa com vários quartos, perfeita para famílias ou grupos que desejam uma experiência íntima com total privacidade." : "A spacious private house with multiple bedrooms, perfect for families or groups wanting an intimate lodge experience with full privacy.",
     price: "13,000",
     priceSuffix: "MZN / night",
-    priceNote: "Sleeps up to 6 (4 in private rooms)",
+    priceNote: lang === "pt" ? "Acomoda até 6" : "Sleeps up to 6 (4 in private rooms)",
     heroImage: "/larger_room.jpg",
     gallery: ["/larger_room.jpg", "/standard_room.jpg"],
     benefits: [
-      { icon: Home, label: "Full private house" },
-      { icon: Users, label: "Up to 6 guests" },
-      { icon: UtensilsCrossed, label: "Self-catering kitchen" },
-      { icon: ShieldCheck, label: "Complete privacy" },
+      { icon: Home, label: lang === "pt" ? "Casa inteira" : "Full private house" },
+      { icon: Users, label: lang === "pt" ? "Até 6 hóspedes" : "Up to 6 guests" },
+      { icon: UtensilsCrossed, label: lang === "pt" ? "Cozinha equipada" : "Self-catering kitchen" },
+      { icon: ShieldCheck, label: lang === "pt" ? "Privacidade total" : "Complete privacy" },
     ],
     pricing: [
-      { season: "Low Season", price: "13,000" },
-      { season: "High Season", price: "15,000" },
-      { season: "Festive Season", price: "25,000" },
+      { season: lang === "pt" ? "Baixa Temporada" : "Low Season", price: "13,000" },
+      { season: lang === "pt" ? "Alta Temporada" : "High Season", price: "15,000" },
+      { season: lang === "pt" ? "Época Festiva" : "Festive Season", price: "25,000" },
     ],
-    extras: ["Meals not included", "Type 2 house — sleeps 4 in private rooms"],
+    extras: [lang === "pt" ? "Refeições não incluídas" : "Meals not included", lang === "pt" ? "Acomoda 4 em quartos privados" : "Type 2 house — sleeps 4 in private rooms"],
     accentFrom: "from-emerald-600/80",
     accentTo: "to-teal-700/80",
-    badge: "Best for Groups",
+    badge: lang === "pt" ? "Melhor para Grupos" : "Best for Groups",
   },
 ];
 
 /* ─── How It Works Steps ─── */
-const steps = [
+const getSteps = (lang: "en" | "pt") => [
   {
     number: "01",
-    title: "Choose your room",
-    desc: "Browse our Standard Rooms or Private Houses and pick the best fit.",
+    title: lang === "pt" ? "Escolha o seu quarto" : "Choose your room",
+    desc: lang === "pt" ? "Navegue pelos nossos Quartos Standard ou Casas Privadas e escolha a melhor opção." : "Browse our Standard Rooms or Private Houses and pick the best fit.",
   },
   {
     number: "02",
-    title: "Send a reservation",
-    desc: "Fill out the enquiry form or email us with your preferred dates.",
+    title: lang === "pt" ? "Faça uma reserva" : "Send a reservation",
+    desc: lang === "pt" ? "Preencha o formulário de reserva ou envie-nos um email com as datas pretendidas." : "Fill out the enquiry form or email us with your preferred dates.",
   },
   {
     number: "03",
-    title: "Enjoy your stay",
-    desc: "Arrive via our transfer service and let the beach-lodge magic begin.",
+    title: lang === "pt" ? "Aproveite a sua estadia" : "Enjoy your stay",
+    desc: lang === "pt" ? "Chegue através do nosso serviço de transfer e deixe a magia começar." : "Arrive via our transfer service and let the beach-lodge magic begin.",
   },
 ];
 
@@ -106,11 +106,12 @@ const ROOM_TYPE_MAP: Record<string, string> = {
 };
 
 interface ModalProps {
-  room: (typeof rooms)[0];
+  room: ReturnType<typeof getRooms>[0];
   onClose: () => void;
+  lang: "en" | "pt";
 }
 
-function RoomModal({ room, onClose }: ModalProps) {
+function RoomModal({ room, onClose, lang }: ModalProps) {
   const handleReserve = useCallback(() => {
     // 1. Close the gallery modal
     onClose();
@@ -156,7 +157,7 @@ function RoomModal({ room, onClose }: ModalProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      className="fixed inset-0 z-9999 flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -172,7 +173,7 @@ function RoomModal({ room, onClose }: ModalProps) {
 
       {/* panel */}
       <motion.div
-        className="relative z-10 mx-4 flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row"
+        className="relative z-10 mx-4 flex w-full max-h-[90vh] max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row"
         initial={{ scale: 0.92, opacity: 0, y: 30 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.92, opacity: 0, y: 30 }}
@@ -229,18 +230,17 @@ function RoomModal({ room, onClose }: ModalProps) {
                 key={i}
                 onClick={() => setCurrent(i)}
                 aria-label={`Go to photo ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  i === current
-                    ? "w-6 bg-white"
-                    : "w-2 bg-white/50 hover:bg-white/70"
-                }`}
+                className={`h-2 rounded-full transition-all ${i === current
+                  ? "w-6 bg-white"
+                  : "w-2 bg-white/50 hover:bg-white/70"
+                  }`}
               />
             ))}
           </div>
         </div>
 
         {/* ─── RIGHT: Details ─── */}
-        <div className="flex w-full flex-col gap-5 overflow-y-auto p-6 md:w-1/2 md:p-8">
+        <div className="flex  w-full flex-col gap-5 overflow-y-auto p-6 md:w-1/2 md:p-8">
           <div>
             <Badge
               variant="secondary"
@@ -272,34 +272,34 @@ function RoomModal({ room, onClose }: ModalProps) {
           {/* Pricing table */}
           <div className="rounded-xl border border-border bg-neutral-50 p-4">
             <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Seasonal Pricing (MZN)
+              {lang === "pt" ? "Preços Sazonais (MZN)" : "Seasonal Pricing (MZN)"}
             </h4>
             <div className="space-y-2 text-sm">
               {room.id === "standard"
                 ? room.pricing.map((p) => (
-                    <div
-                      key={p.season}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-foreground">{p.season}</span>
-                      <span className="font-medium text-foreground">
-                        {"withBreakfast" in p
-                          ? `${p.without} – ${p.withBreakfast}`
-                          : ""}
-                      </span>
-                    </div>
-                  ))
+                  <div
+                    key={p.season}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="text-foreground">{p.season}</span>
+                    <span className="font-medium text-foreground">
+                      {"withBreakfast" in p
+                        ? `${p.without} – ${p.withBreakfast}`
+                        : ""}
+                    </span>
+                  </div>
+                ))
                 : room.pricing.map((p) => (
-                    <div
-                      key={p.season}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-foreground">{p.season}</span>
-                      <span className="font-medium text-foreground">
-                        {"price" in p ? p.price : ""}
-                      </span>
-                    </div>
-                  ))}
+                  <div
+                    key={p.season}
+                    className="flex items-center justify-between"
+                  >
+                    <span className="text-foreground">{p.season}</span>
+                    <span className="font-medium text-foreground">
+                      {"price" in p ? p.price : ""}
+                    </span>
+                  </div>
+                ))}
             </div>
           </div>
 
@@ -318,7 +318,7 @@ function RoomModal({ room, onClose }: ModalProps) {
             onClick={handleReserve}
             className="mt-auto inline-flex items-center justify-center rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-[0.97]"
           >
-            Reserve This Room
+            {lang === "pt" ? "Reservar Este Quarto" : "Reserve This Room"}
           </button>
         </div>
       </motion.div>
@@ -333,9 +333,11 @@ function RoomModal({ room, onClose }: ModalProps) {
 function RoomCard({
   room,
   onOpen,
+  lang,
 }: {
-  room: (typeof rooms)[0];
+  room: ReturnType<typeof getRooms>[0];
   onOpen: () => void;
+  lang: "en" | "pt";
 }) {
   return (
     <CardContainer containerClassName="py-8 md:py-10">
@@ -364,7 +366,7 @@ function RoomCard({
             {/* click hint */}
             <span className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-xs font-medium text-white opacity-0 backdrop-blur-md transition-opacity group-hover/card:opacity-100">
               <Sparkles className="h-3.5 w-3.5" />
-              View Gallery
+              {lang === "pt" ? "Ver Galeria" : "View Gallery"}
             </span>
           </div>
         </CardItem>
@@ -415,7 +417,7 @@ function RoomCard({
             onClick={onOpen}
             className="w-full rounded-xl bg-neutral-900 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-[0.98]"
           >
-            Explore &amp; Book →
+            {lang === "pt" ? "Explorar & Reservar →" : "Explore & Book →"}
           </button>
         </CardItem>
       </CardBody>
@@ -427,8 +429,27 @@ function RoomCard({
 /*  SECTION                                                               */
 /* ════════════════════════════════════════════════════════════════════════ */
 
-export default function RoomsSection() {
-  const [openRoom, setOpenRoom] = useState<(typeof rooms)[0] | null>(null);
+export default function RoomsSection({ lang = "en" }: { lang?: "en" | "pt" }) {
+  const rooms = getRooms(lang);
+  const steps = getSteps(lang);
+  const [openRoom, setOpenRoom] = useState<ReturnType<typeof getRooms>[0] | null>(null);
+
+  const t = {
+    en: {
+      badge: "Our Accommodations",
+      title: "Choose Your Perfect Stay",
+      desc: "From intimate rooms to spacious private houses — find the ideal getaway at Mangal Beach Lodge, right on the coast of Inhambane.",
+      howItWorks: "How It Works",
+      transferNote: "Transfer service available at 2,500 MZN per trip (max 4 guests). All prices in Mozambican Metical (MZN) per night."
+    },
+    pt: {
+      badge: "Nossas Acomodações",
+      title: "Escolha a Sua Estadia Perfeita",
+      desc: "De quartos íntimos a casas privadas espaçosas — encontre o refúgio ideal no Mangal Beach Lodge, mesmo na costa de Inhambane.",
+      howItWorks: "Como Funciona",
+      transferNote: "Serviço de transfer disponível por 2.500 MZN por viagem (máx. 4 pessoas). Todos os preços em Metical Moçambicano (MZN) por noite."
+    }
+  }[lang];
 
   return (
     <section id="rooms" className="py-16 md:py-24">
@@ -436,14 +457,13 @@ export default function RoomsSection() {
       <div className="mx-auto mb-4 max-w-2xl text-center">
         <Badge variant="secondary" className="mb-4 text-muted-foreground">
           <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-          Our Accommodations
+          {t.badge}
         </Badge>
         <h2 className="font-heading text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-          Choose Your Perfect Stay
+          {t.title}
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          From intimate rooms to spacious private houses — find the ideal
-          getaway at Mangal Beach Lodge, right on the coast of Inhambane.
+          {t.desc}
         </p>
       </div>
 
@@ -454,6 +474,7 @@ export default function RoomsSection() {
             key={room.id}
             room={room}
             onOpen={() => setOpenRoom(room)}
+            lang={lang}
           />
         ))}
       </div>
@@ -461,7 +482,7 @@ export default function RoomsSection() {
       {/* ─── How It Works ─── */}
       <div className="mx-auto mt-16 max-w-4xl">
         <h3 className="mb-8 text-center text-lg font-semibold tracking-tight text-foreground sm:text-xl">
-          How It Works
+          {t.howItWorks}
         </h3>
         <div className="grid gap-6 sm:grid-cols-3">
           {steps.map((s) => (
@@ -487,15 +508,13 @@ export default function RoomsSection() {
 
       {/* ─── Transfer note ─── */}
       <p className="mx-auto mt-10 max-w-md text-center text-xs text-muted-foreground">
-        Transfer service available at 2,500 MZN per trip (max 4 guests).
-        <br />
-        All prices in Mozambican Metical (MZN) per night.
+        {t.transferNote}
       </p>
 
       {/* ─── Modal ─── */}
       <AnimatePresence>
         {openRoom && (
-          <RoomModal room={openRoom} onClose={() => setOpenRoom(null)} />
+          <RoomModal room={openRoom} onClose={() => setOpenRoom(null)} lang={lang} />
         )}
       </AnimatePresence>
     </section>
