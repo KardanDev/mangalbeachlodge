@@ -4,6 +4,8 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import HeroSection from "@components/sections/landing/HeroSection.astro";
 import FacilitiesSection from "@components/sections/landing/FacilitiesSection.tsx";
 import RoomsSection from "@components/sections/landing/RoomsSection.tsx";
+import ExperiencesSection from "@components/sections/landing/ExperiencesSection.tsx";
+import DiningSection from "@components/sections/landing/DiningSection.tsx";
 import AboutSection from "@components/sections/landing/AboutSection.tsx";
 import FAQSection from "@components/sections/landing/FAQSection.tsx";
 import { SITE } from "@data/constants";
@@ -13,6 +15,8 @@ import { SITE } from "@data/constants";
   <HeroSection />
   <FacilitiesSection lang="en" client:visible />
   <RoomsSection lang="en" client:visible />
+  <ExperiencesSection lang="en" client:visible />
+  <DiningSection lang="en" client:visible />
   <AboutSection lang="en" client:visible />
   <FAQSection lang="en" client:visible />
 </MainLayout>

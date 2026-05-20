@@ -14,6 +14,11 @@ import {
   Home,
   UtensilsCrossed,
   ShieldCheck,
+  Wifi,
+  Droplets,
+  Wind,
+  Snowflake,
+  Bed
 } from "lucide-react";
 
 /* ─── Room Data ─── */
@@ -31,9 +36,12 @@ const getRooms = (lang: "en" | "pt") => [
     gallery: ["/standard_room.jpg", "/larger_room.jpg"],
     benefits: [
       { icon: BedDouble, label: lang === "pt" ? "Cama Queen-size" : "Queen-size bed" },
-      { icon: Coffee, label: lang === "pt" ? "Opção de pequeno-almoço" : "Breakfast included option" },
       { icon: Users, label: lang === "pt" ? "Até 2 hóspedes" : "Up to 2 guests" },
-      { icon: Waves, label: lang === "pt" ? "Terraço com vista para o mar" : "Ocean-view terrace" },
+      { icon: Waves, label: lang === "pt" ? "Varanda com vista" : "Ocean-view balcony" },
+      { icon: Wifi, label: lang === "pt" ? "Wi-Fi Gratuito" : "Free Wi-Fi" },
+      { icon: Droplets, label: lang === "pt" ? "Água Quente" : "Hot Water" },
+      { icon: Wind, label: lang === "pt" ? "Ar Condicionado" : "Air Conditioning" },
+      { icon: Snowflake, label: lang === "pt" ? "Geleirinha de bar" : "Mini-fridge" },
     ],
     pricing: [
       { season: lang === "pt" ? "Baixa Temporada" : "Low Season", withBreakfast: "6,500", without: "5,000" },
@@ -43,6 +51,7 @@ const getRooms = (lang: "en" | "pt") => [
     extras: [
       lang === "pt" ? "Cama Extra Adulto: 2,500 MZN" : "Extra Adult Bed: 2,500 MZN",
       lang === "pt" ? "Cama Extra Criança (5–12 anos): 1,500 MZN" : "Extra Child Bed (5–12 yrs): 1,500 MZN",
+      lang === "pt" ? "Opção de pequeno-almoço disponível" : "Breakfast option available",
     ],
     accentFrom: "from-amber-500/80",
     accentTo: "to-orange-600/80",
@@ -63,7 +72,10 @@ const getRooms = (lang: "en" | "pt") => [
       { icon: Home, label: lang === "pt" ? "Casa inteira" : "Full private house" },
       { icon: Users, label: lang === "pt" ? "Até 6 hóspedes" : "Up to 6 guests" },
       { icon: UtensilsCrossed, label: lang === "pt" ? "Cozinha equipada" : "Self-catering kitchen" },
-      { icon: ShieldCheck, label: lang === "pt" ? "Privacidade total" : "Complete privacy" },
+      { icon: Wifi, label: lang === "pt" ? "Wi-Fi Gratuito" : "Free Wi-Fi" },
+      { icon: Droplets, label: lang === "pt" ? "Água Quente" : "Hot Water" },
+      { icon: Wind, label: lang === "pt" ? "Ar Condicionado" : "Air Conditioning" },
+      { icon: Bed, label: lang === "pt" ? "Cama beliche" : "Bunk bed" },
     ],
     pricing: [
       { season: lang === "pt" ? "Baixa Temporada" : "Low Season", price: "13,000" },

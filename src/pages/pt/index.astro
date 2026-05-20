@@ -4,6 +4,8 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import HeroSection from "@components/sections/landing/HeroSection.astro";
 import FacilitiesSection from "@components/sections/landing/FacilitiesSection.tsx";
 import RoomsSection from "@components/sections/landing/RoomsSection.tsx";
+import ExperiencesSection from "@components/sections/landing/ExperiencesSection.tsx";
+import DiningSection from "@components/sections/landing/DiningSection.tsx";
 import AboutSection from "@components/sections/landing/AboutSection.tsx";
 import FAQSection from "@components/sections/landing/FAQSection.tsx";
 
@@ -15,6 +17,8 @@ const description = "Experimente a autêntica hospitalidade moçambicana junto a
   <HeroSection />
   <FacilitiesSection lang="pt" client:visible />
   <RoomsSection lang="pt" client:visible />
+  <ExperiencesSection lang="pt" client:visible />
+  <DiningSection lang="pt" client:visible />
   <AboutSection lang="pt" client:visible />
   <FAQSection lang="pt" client:visible />
 </MainLayout>
