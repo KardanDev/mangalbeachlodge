@@ -27,7 +27,7 @@ import {
     ExpandableScreenTrigger,
     useExpandableScreen,
 } from "@/components/ui/expandable-screen"
-import BrandLogo from "@/components/BrandLogo.astro"
+// import BrandLogo from "@/components/BrandLogo.astro"
 import { cn } from "@/lib/utils"
 
 type RoomType = "standard" | "villa"
@@ -355,32 +355,28 @@ function MobileReservationEmail() {
             <ExpandableScreenContent className={cn(
                 "border z-[100] bg-neutral-50 text-neutral-800 shadow-lg dark:bg-neutral-200 dark:text-neutral-700 md:overflow-hidden",
             )}>
-                <div className="flex h-full w-full z-50">
-                    <div className="hidden lg:flex lg:w-1/2 relative">
-                        <div className="sticky top-0 h-screen w-full">
-                            <img
-                                src="/reserve_now_coast.jpeg"
-                                alt="Resort"
-                                className="h-full w-full object-cover"
-                            />
+                <div className="flex flex-col lg:flex-row h-full w-full z-[40]">
+                    <div className="hidden lg:block lg:w-1/2 relative h-full">
+                        <img
+                            src="/reserve_now_coast.jpeg"
+                            alt="Resort"
+                            className="h-full w-full object-cover"
+                        />
 
-                            {/* optional overlay */}
-                            <div className="absolute inset-0 bg-black/20" />
+                        {/* optional overlay */}
+                        <div className="absolute inset-0 bg-black/20" />
 
-                            {/* optional text overlay */}
-                            <div className="absolute bottom-6 left-6 text-neutral-900">
-                                <p className="text-sm font-bold">Mangal Beach Lodge</p>
-                                <p className="text-xl font-medium">Your coastal escape</p>
-                            </div>
+                        {/* optional text overlay */}
+                        <div className="absolute bottom-6 left-6 text-white">
+                            <p className="text-sm font-bold shadow-black/50 drop-shadow-md">Mangal Beach Lodge</p>
+                            <p className="text-xl font-medium shadow-black/50 drop-shadow-md">Your coastal escape</p>
                         </div>
                     </div>
 
                     {/* Right Side */}
-                    <div className="w-full md:w-1/2 overflow-y-auto">
-
-
-                        <div className="flex h-full w-full  flex-col gap-5 p-4 ">
-                            <img src="/brand-logo.png" alt="Mangal Beach Lodge Logo" className=" w-56 h-14 object-contain aspect-square" />
+                    <div className="w-full lg:w-1/2 h-full overflow-y-auto overscroll-none pb-24">
+                        <div className="flex w-full flex-col gap-5 p-4">
+                            <img src="/logo_updated.png" alt="Mangal Beach Lodge Logo" className=" w-56 h-14 object-contain aspect-square" />
 
                             <div className="space-y-2  pb-4">
 

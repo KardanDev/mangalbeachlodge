@@ -69,14 +69,14 @@ export default function AboutSection({ lang = "en" }: { lang?: "en" | "pt" }) {
       badge: "About Us",
       title: "A coastal escape where the ocean",
       titleBreak: "meets authentic Mozambican warmth.",
-      desc: "Nestled on the shores of Vilankulos, Inhambane — Mangal Beach Lodge blends rustic charm with modern comfort. From the turquoise waters of the Bazaruto Archipelago to our open-air kitchen, every detail is crafted for relaxation and discovery.",
+      desc: "A coastal escape where the green meets the blue of the sea, surrounded by native trees, coconut palms, and the mangrove.",
       learnMore: "Learn more about us"
     },
     pt: {
       badge: "Sobre Nós",
       title: "Um refúgio costeiro onde o oceano",
       titleBreak: "encontra o autêntico calor moçambicano.",
-      desc: "Situado nas margens de Vilankulos, Inhambane — o Mangal Beach Lodge combina charme rústico com conforto moderno. Das águas azul-turquesa do Arquipélago de Bazaruto à nossa cozinha ao ar livre, cada detalhe é criado para relaxamento e descoberta.",
+      desc: "Um refúgio costeiro onde o verde encontra o azul do mar rodeado por arvores nativas, coqueiros e o mangal",
       learnMore: "Saiba mais sobre nós"
     }
   }[lang];

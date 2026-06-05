@@ -9,7 +9,8 @@ const t = {
     title1: "Where the Green meets the Blue,",
     title2: "a hidden paradise",
     title3: "at Mangal Beach Lodge!",
-    description: "Wake up to the sound of the nature and ocean, relax under the native trees and palm trees, and enjoy an unforgettable Top Tree Deck with the view for the mangrove on the beach and the arquipelago of Bazaruto. 🌊 Comfort, nature, and tranquility await you!",
+    description1: "Escape to a place where the ocean breeze, swaying palms, and untouched nature create the perfect and relaxing staying. Wake up to the sound of the birds, relax beneath native tropical trees, and discover our stunning Top Tree Deck with panoramic views of the mangroves and the breathtaking Bazaruto Archipelago.",
+    description2: "Designed for comfort, surrounded by nature, and filled with tranquility, this is more than a stay, it’s an unforgettable experience.",
     location: "* Vilankulos, Inhambane, Mozambique",
     seeDirection: "See direction",
   },
@@ -17,8 +18,10 @@ const t = {
     title1: "Onde o verde encontra o azul, um",
     title2: "paraíso escondido",
     title3: "no Mangal Beach Lodge!",
-    description:
-      "Experimente a autêntica hospitalidade moçambicana junto ao oceano em Vilankulos. Situado no Arquipélago de Bazaruto, o Mangal Beach Lodge oferece areias brancas imaculadas, águas cristalinas e memórias que durarão para sempre.",
+    description1:
+      "Fuja para um lugar onde a brisa do oceano, as palmeiras ondulantes e a natureza intocada criam a estadia perfeita e relaxante. Acorde com o som dos pássaros, relaxe sob as árvores tropicais nativas e descubra o nosso deslumbrante Top Tree Deck com vistas panorâmicas sobre os mangais e o Arquipélago de Bazaruto.",
+    description2:
+      "Projetado para o conforto, cercado pela natureza e repleto de tranquilidade, esta é mais do que uma estadia, é uma experiência inesquecível.",
     location: "* Vilankulos, Inhambane, Moçambique",
     seeDirection: "Ver direções",
   },
@@ -39,18 +42,19 @@ const t = {
       </h1>
 
       <img
-        src="/mangal-entrance.png"
+        src="/sea.jpeg"
         alt="Mangal Beach Lodge entrance"
         class="mt-7 mr-20 ml-auto h-20 w-full max-w-72.5 rounded-full object-cover shadow-md sm:h-24 sm:max-w-85 lg:mr-auto"
         loading="lazy"
         decoding="async"
       />
 
-      <p
-        class="mt-6 max-w-md text-sm leading-relaxed text-pretty text-zinc-600 sm:max-w-xl sm:text-base"
+      <div
+        class="mt-6 max-w-md space-y-4 text-sm leading-relaxed text-pretty text-zinc-600 sm:max-w-xl sm:text-base"
       >
-        {t.description}
-      </p>
+        <p>{t.description1}</p>
+        <p>{t.description2}</p>
+      </div>
 
       <div
         class="mt-10 flex flex-col gap-4 rounded-[1.75rem] bg-neutral-100 px-6 py-5 text-zinc-900 sm:flex-row sm:items-center sm:justify-between"

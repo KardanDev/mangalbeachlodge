@@ -24,14 +24,6 @@ const getDiningFeatures = (lang: "en" | "pt") => ({
       image: "/bar.jpeg",
       reverse: true,
     },
-    {
-      id: "self-catering",
-      title: lang === "pt" ? "Instalações de Self-Catering" : "Self-Catering Facilities",
-      desc: lang === "pt" ? "Também dispomos de uma instalação de self-catering onde os nossos hóspedes se podem sentir em casa a grelhar ou a cozinhar enquanto desfrutam das suas bebidas geladas. O lodge tem uma mercearia disponível para os hóspedes onde podem encontrar uma variedade de bens." : "We also have a self-catering facility where our guests can feel at home grilling or cooking while enjoying their ice-cold drinks. The lodge has a grocery shop available for our guests where they can find a variety of goods.",
-      icon: Store,
-      image: "/walkway.jpg",
-      reverse: false,
-    }
   ]
 });
 
@@ -41,7 +33,6 @@ export default function DiningSection({ lang = "en" }: { lang?: "en" | "pt" }) {
   return (
     <section id="dining" className="py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 max-w-6xl">
-        {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <Badge variant="secondary" className="mb-4 text-muted-foreground">
             <Utensils className="mr-1.5 h-3.5 w-3.5" />

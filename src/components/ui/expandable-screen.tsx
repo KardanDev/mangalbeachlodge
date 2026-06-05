@@ -167,13 +167,13 @@ export function ExpandableScreenContent({
               borderRadius: contentRadius,
             }}
             layout
-            className={`relative flex h-full w-full overflow-y-auto transform-gpu will-change-transform ${className}`}
+            className={`relative h-full w-full overflow-hidden transform-gpu will-change-transform ${className}`}
           >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15, duration: 0.4 }}
-              className="relative  w-full pb-6 "
+              className="relative h-full w-full"
             >
               {children}
             </motion.div>
@@ -181,8 +181,8 @@ export function ExpandableScreenContent({
             {showCloseButton && (
               <motion.button
                 onClick={collapse}
-                className={`absolute right-6 top-6 z-30 flex h-10 w-10 items-center justify-center transition-colors rounded-full ${closeButtonClassName ||
-                  "text-neutral-800 bg-transparent hover:bg-neutral-800/10"
+                className={`absolute right-6 top-6 z-[60] flex h-10 w-10 items-center justify-center transition-colors rounded-full ${closeButtonClassName ||
+                  "text-neutral-800 bg-white/60 backdrop-blur-md hover:bg-white/90 shadow-sm"
                   }`}
                 aria-label="Close"
               >

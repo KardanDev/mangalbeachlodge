@@ -29,29 +29,33 @@ const getRooms = (lang: "en" | "pt") => [
     subtitle: "Quartos",
     description:
       lang === "pt" ? "Um quarto aconchegante e bem equipado com teto de palha e decoração artesanal — o refúgio perfeito para casais ou viajantes individuais." : "A cozy, beautifully appointed room with a thatched roof and artisan décor — the perfect retreat for couples or solo travellers seeking comfort by the coast.",
-    price: "5,000",
+    price: "6,500",
     priceSuffix: "MZN / night",
     priceNote: lang === "pt" ? "Preços por noite para 2 hóspedes" : "Prices per night for 2 guests",
-    heroImage: "/standard_room.jpg",
-    gallery: ["/standard_room.jpg", "/larger_room.jpg"],
+    heroImage: "/standard_room/IMG_4329.jpeg",
+    gallery: [
+      "/standard_room/IMG_4329.jpeg",
+      "/standard_room/IMG_4333.jpeg",
+      "/standard_room/IMG_4351.jpeg"
+    ],
     benefits: [
-      { icon: BedDouble, label: lang === "pt" ? "Cama Queen-size" : "Queen-size bed" },
+      { icon: BedDouble, label: lang === "pt" ? "Cama de casal" : "Double bed" },
       { icon: Users, label: lang === "pt" ? "Até 2 hóspedes" : "Up to 2 guests" },
-      { icon: Waves, label: lang === "pt" ? "Varanda com vista" : "Ocean-view balcony" },
+      { icon: Waves, label: lang === "pt" ? "Vista para o jardim" : "Garden view" },
       { icon: Wifi, label: lang === "pt" ? "Wi-Fi Gratuito" : "Free Wi-Fi" },
       { icon: Droplets, label: lang === "pt" ? "Água Quente" : "Hot Water" },
       { icon: Wind, label: lang === "pt" ? "Ar Condicionado" : "Air Conditioning" },
       { icon: Snowflake, label: lang === "pt" ? "Geleirinha de bar" : "Mini-fridge" },
     ],
     pricing: [
-      { season: lang === "pt" ? "Baixa Temporada" : "Low Season", withBreakfast: "6,500", without: "5,000" },
-      { season: lang === "pt" ? "Alta Temporada" : "High Season", withBreakfast: "8,500", without: "7,000" },
-      { season: lang === "pt" ? "Época Festiva" : "Festive Season", withBreakfast: "12,500", without: "11,000" },
+      { season: lang === "pt" ? "Baixa Temporada" : "Low Season", price: "6,500" },
+      { season: lang === "pt" ? "Alta Temporada" : "High Season", price: "8,500" },
+      { season: lang === "pt" ? "Época Festiva" : "Festive Season", price: "12,500" },
     ],
     extras: [
       lang === "pt" ? "Cama Extra Adulto: 2,500 MZN" : "Extra Adult Bed: 2,500 MZN",
       lang === "pt" ? "Cama Extra Criança (5–12 anos): 1,500 MZN" : "Extra Child Bed (5–12 yrs): 1,500 MZN",
-      lang === "pt" ? "Opção de pequeno-almoço disponível" : "Breakfast option available",
+      lang === "pt" ? "Pequeno-almoço incluído nestes preços" : "Breakfast included in these prices",
     ],
     accentFrom: "from-amber-500/80",
     accentTo: "to-orange-600/80",
@@ -65,9 +69,13 @@ const getRooms = (lang: "en" | "pt") => [
       lang === "pt" ? "Uma casa espaçosa com vários quartos, perfeita para famílias ou grupos que desejam uma experiência íntima com total privacidade." : "A spacious private house with multiple bedrooms, perfect for families or groups wanting an intimate lodge experience with full privacy.",
     price: "13,000",
     priceSuffix: "MZN / night",
-    priceNote: lang === "pt" ? "Acomoda até 6" : "Sleeps up to 6 (4 in private rooms)",
-    heroImage: "/larger_room.jpg",
-    gallery: ["/larger_room.jpg", "/standard_room.jpg"],
+    priceNote: lang === "pt" ? "Acomoda 4 em privado, 2 em beliche" : "Sleeps up to 6 (4 in private rooms, 2 in bunkbed)",
+    heroImage: "/private_house/exterior.jpg",
+    gallery: [
+      "/private_house/exterior.jpg",
+      "/private_house/exterior2.png",
+      "/private_house/interior.png"
+    ],
     benefits: [
       { icon: Home, label: lang === "pt" ? "Casa inteira" : "Full private house" },
       { icon: Users, label: lang === "pt" ? "Até 6 hóspedes" : "Up to 6 guests" },
@@ -287,31 +295,17 @@ function RoomModal({ room, onClose, lang }: ModalProps) {
               {lang === "pt" ? "Preços Sazonais (MZN)" : "Seasonal Pricing (MZN)"}
             </h4>
             <div className="space-y-2 text-sm">
-              {room.id === "standard"
-                ? room.pricing.map((p) => (
-                  <div
-                    key={p.season}
-                    className="flex items-center justify-between"
-                  >
-                    <span className="text-foreground">{p.season}</span>
-                    <span className="font-medium text-foreground">
-                      {"withBreakfast" in p
-                        ? `${p.without} – ${p.withBreakfast}`
-                        : ""}
-                    </span>
-                  </div>
-                ))
-                : room.pricing.map((p) => (
-                  <div
-                    key={p.season}
-                    className="flex items-center justify-between"
-                  >
-                    <span className="text-foreground">{p.season}</span>
-                    <span className="font-medium text-foreground">
-                      {"price" in p ? p.price : ""}
-                    </span>
-                  </div>
-                ))}
+              {room.pricing.map((p) => (
+                <div
+                  key={p.season}
+                  className="flex items-center justify-between"
+                >
+                  <span className="text-foreground">{p.season}</span>
+                  <span className="font-medium text-foreground">
+                    {"price" in p ? p.price : ""}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
