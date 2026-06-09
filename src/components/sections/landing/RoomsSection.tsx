@@ -32,11 +32,10 @@ const getRooms = (lang: "en" | "pt") => [
     price: "6,500",
     priceSuffix: "MZN / night",
     priceNote: lang === "pt" ? "Preços por noite para 2 hóspedes" : "Prices per night for 2 guests",
-    heroImage: "/standard_room/IMG_4329.jpeg",
+    heroImage: "/standard_room.jpg",
     gallery: [
-      "/standard_room/IMG_4329.jpeg",
-      "/standard_room/IMG_4333.jpeg",
-      "/standard_room/IMG_4351.jpeg"
+      "/standard_room.jpg",
+      "/larger_room.jpg"
     ],
     benefits: [
       { icon: BedDouble, label: lang === "pt" ? "Cama de casal" : "Double bed" },
@@ -74,7 +73,13 @@ const getRooms = (lang: "en" | "pt") => [
     gallery: [
       "/private_house/exterior.jpg",
       "/private_house/exterior2.png",
-      "/private_house/interior.png"
+      "/private_house/interior.png",
+      "/standard_room/IMG_4329.jpeg",
+      "/standard_room/IMG_4333.jpeg",
+      "/standard_room/IMG_4351.jpeg",
+      "/shared_rooom/IMG_1511.png",
+      "/shared_rooom/IMG_1512.png",
+      "/shared_rooom/IMG_4337.jpeg"
     ],
     benefits: [
       { icon: Home, label: lang === "pt" ? "Casa inteira" : "Full private house" },
