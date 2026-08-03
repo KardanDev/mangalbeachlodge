@@ -37,7 +37,7 @@ const getRooms = (lang: "en" | "pt") => [
       lang === "pt"
         ? "Preços por noite para 2 hóspedes"
         : "Prices per night for 2 guests",
-    heroImage: "/standard_room.jpg",
+    heroImage: "/standard_room/IMG_1512.png",
     gallery: [
       "/standard_room/IMG_1512.png",
       "/standard_room/IMG_1912.jpeg",
@@ -118,14 +118,11 @@ const getRooms = (lang: "en" | "pt") => [
     gallery: [
       "/private_house/exterior.jpg",
       "/private_house/exterior2.png",
-      "/private_house/interior.png",
       "/standard_room/IMG_4329.jpeg",
       "/standard_room/IMG_4333.jpeg",
       "/standard_room/IMG_4351.jpeg",
-      "/shared_room/IMG_1511.png",
       "/shared_room/IMG_4337.jpeg",
       "/shared_room/75EDE070-7165-41DC-ACA4-B95484D8A54C.png",
-      "/shared_room/dji_fly_20230429_100842_525_1682785036764_photo.jpeg",
       "/shared_room/IMG_0366.jpeg",
       "/shared_room/IMG_0368.jpeg",
       "/shared_room/IMG_0375.jpeg",
@@ -133,8 +130,6 @@ const getRooms = (lang: "en" | "pt") => [
       "/shared_room/IMG_0387.jpeg",
       "/shared_room/IMG_0390.jpeg",
       "/shared_room/IMG_3589.jpeg",
-      "/shared_room/IMG_4569.jpeg",
-      "/shared_room/IMG_5950.jpeg",
       "/shared_room/IMG_7245.jpeg",
       "/shared_room/IMG_9045.jpeg",
       "/shared_room/IMG_9046.jpeg",

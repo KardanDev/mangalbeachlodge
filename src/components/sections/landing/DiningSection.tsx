@@ -1,7 +1,71 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { Utensils, Store, Wine, ChefHat } from "lucide-react";
+import {
+  Utensils,
+  Store,
+  Wine,
+  ChefHat,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
+function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
+  const [current, setCurrent] = React.useState(0);
+
+  const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
+
+  const next = () => setCurrent((c) => (c + 1) % images.length);
+
+  return (
+    <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl border shadow-lg sm:aspect-video md:aspect-[4/3]">
+      <motion.img
+        key={images[current]}
+        src={images[current]}
+        alt={alt}
+        className="absolute inset-0 h-full w-full object-cover"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -40 }}
+        transition={{ duration: 0.35 }}
+      />
+
+      <div className="absolute inset-0 bg-black/5 transition-colors duration-500 group-hover:bg-transparent" />
+
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            className="absolute top-1/2 left-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition hover:bg-white/40"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          <button
+            onClick={next}
+            className="absolute top-1/2 right-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition hover:bg-white/40"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`h-2 rounded-full transition-all ${
+                  current === i
+                    ? "w-6 bg-white"
+                    : "w-2 bg-white/50 hover:bg-white/80"
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 const getDiningFeatures = (lang: "en" | "pt") => ({
   badge: lang === "pt" ? "Gastronomia & Comodidades" : "Dining & Amenities",
@@ -20,7 +84,13 @@ const getDiningFeatures = (lang: "en" | "pt") => ({
           ? "O nosso chef no local atende a vários requisitos, incluindo eventos. Desfrute de marisco fresco pescado localmente, comida portuguesa e outra culinária local e internacional."
           : "Our onsite chef caters to various requirements, including functions. Enjoy tasty fresh seafood caught locally, Portuguese food, and other local and international cuisine.",
       icon: ChefHat,
-      image: "/seafood_wine.jpeg",
+      images: [
+        "/IMG_2365.jpeg",
+        "/dji_fly_20230429_100842_525_1682785036764_photo.jpeg",
+
+        "/IMG_9042.jpeg",
+        "/seafood_wine.jpeg",
+      ],
       reverse: false,
     },
     {
@@ -31,7 +101,7 @@ const getDiningFeatures = (lang: "en" | "pt") => ({
           ? "O Lodge também inclui um bar e restaurante que se orgulha de oferecer um serviço da mais alta qualidade e uma variedade de bebidas, incluindo cocktails."
           : "The Lodge also includes a restaurant & bar, which prides itself on providing the highest quality service and a variety of beverages, including cocktails.",
       icon: Wine,
-      image: "/bar.jpeg",
+      images: ["/bar.jpeg", "/IMG_4569.jpeg"],
       reverse: true,
     },
   ],
@@ -74,11 +144,7 @@ export default function DiningSection({ lang = "en" }: { lang?: "en" | "pt" }) {
                 className="group relative w-full md:w-1/2"
               >
                 <div className="border-border relative aspect-[4/3] overflow-hidden rounded-3xl border shadow-lg sm:aspect-video md:aspect-[4/3]">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <ImageCarousel images={feature.images} alt={feature.title} />
                   {/* subtle overlay */}
                   <div className="absolute inset-0 bg-black/5 transition-colors duration-500 group-hover:bg-transparent" />
                 </div>

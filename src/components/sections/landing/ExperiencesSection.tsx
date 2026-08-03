@@ -6,14 +6,24 @@ import { motion } from "framer-motion";
 
 const getExperiences = (lang: "en" | "pt") => ({
   badge: lang === "pt" ? "Aventuras e Passeios" : "Adventures & Tours",
-  title: lang === "pt" ? "Experiências Inesquecíveis" : "Unforgettable Experiences",
-  desc: lang === "pt" ? "Explore o arquipélago, desfrute do oceano ou passeie a cavalo pelas dunas vermelhas." : "Explore the archipelago, enjoy the ocean, or ride horseback along the red dunes.",
+  title:
+    lang === "pt" ? "Experiências Inesquecíveis" : "Unforgettable Experiences",
+  desc:
+    lang === "pt"
+      ? "Explore o arquipélago, desfrute do oceano ou passeie a cavalo pelas dunas vermelhas."
+      : "Explore the archipelago, enjoy the ocean, or ride horseback along the red dunes.",
   activities: [
     {
-      id: "snorkeling",
-      title: lang === "pt" ? "Passeios às Ilhas e Snorkeling" : "Island Trips & Snorkeling",
-      desc: lang === "pt" ? "Visite as Ilhas Santa Carolina, Bazaruto, Benguerra, Magaruque ou Bangue. Mergulho com tartarugas e raias majestosas." : "Visit Santa Carolina, Bazaruto, Benguerra, Magaruque, or Bangue Islands. Snorkel with turtles and majestic manta rays.",
-      icon: Fish,
+      id: "canoe",
+      title:
+        lang === "pt"
+          ? "Passeio de Canoa no Rio Govuro"
+          : "Govuro River Canoe Tour",
+      desc:
+        lang === "pt"
+          ? "Explore as águas calmas do Rio Govuro de canoa, rodeado por zonas húmidas, aves e paisagens tranquilas."
+          : "Explore the tranquil Govuro River by canoe, surrounded by wetlands, birdlife, and beautiful scenery.",
+      icon: Sailboat,
       video: "/canoe_ride_video.mov",
       thumbnail: "/canoe_ride.jpeg",
       colSpan: "col-span-1 md:col-span-2",
@@ -22,46 +32,59 @@ const getExperiences = (lang: "en" | "pt") => ({
     {
       id: "horse_riding",
       title: lang === "pt" ? "Passeios a Cavalo" : "Horse Riding",
-      desc: lang === "pt" ? "Liderado por guias locais experientes no interior ou na água junto à praia." : "Led by expert local guides inland or on the water by the beach.",
+      desc:
+        lang === "pt"
+          ? "Passeios guiados por praias, dunas e trilhos naturais."
+          : "Guided rides along beaches, dunes, and scenic nature trails.",
       icon: Map,
       image: "/horse_riding.jpg",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
     },
     {
-      id: "sunset",
-      title: lang === "pt" ? "Dunas Vermelhas e Pôr do Sol" : "Red Dunes & Sunset",
-      desc: lang === "pt" ? "Passeio pelas dunas vermelhas (inclui música ao vivo e bebidas) e passeio de moto-quatro." : "Sunset tour by road in the red dunes (including live music and beverages) and quad bike drives.",
+      id: "island_trips",
+      title: lang === "pt" ? "Passeios às Ilhas" : "Island Trips",
+      desc:
+        lang === "pt"
+          ? "Descubra as ilhas de Santa Carolina, Bazaruto, Benguerra, Magaruque e Bangue com praias paradisíacas e águas cristalinas."
+          : "Discover Santa Carolina, Bazaruto, Benguerra, Magaruque, and Bangue Islands, known for pristine beaches and crystal-clear waters.",
       icon: Sunset,
       image: "/reserve_now_coast.jpeg",
       colSpan: "col-span-1",
       rowSpan: "row-span-1",
-    }
-  ]
+    },
+  ],
 });
 
-export default function ExperiencesSection({ lang = "en" }: { lang?: "en" | "pt" }) {
+export default function ExperiencesSection({
+  lang = "en",
+}: {
+  lang?: "en" | "pt";
+}) {
   const content = getExperiences(lang);
 
   return (
-    <section id="experiences" className="py-16 md:py-24 bg-neutral-50/50 dark:bg-neutral-900/50">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section
+      id="experiences"
+      className="bg-neutral-50/50 py-16 md:py-24 dark:bg-neutral-900/50"
+    >
+      <div className="container mx-auto max-w-6xl px-4">
         {/* Header */}
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <Badge variant="secondary" className="mb-4 text-muted-foreground">
+          <Badge variant="secondary" className="text-muted-foreground mb-4">
             <Sailboat className="mr-1.5 h-3.5 w-3.5" />
             {content.badge}
           </Badge>
-          <h2 className="font-heading text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="font-heading text-foreground text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-5xl">
             {content.title}
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p className="text-muted-foreground mt-4 text-sm leading-relaxed sm:text-base">
             {content.desc}
           </p>
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[250px]">
+        <div className="grid auto-rows-[250px] grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
           {content.activities.map((activity, index) => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -69,7 +92,7 @@ export default function ExperiencesSection({ lang = "en" }: { lang?: "en" | "pt"
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               key={activity.id}
-              className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border border-border bg-white dark:bg-neutral-900 shadow-sm ${activity.colSpan} ${activity.rowSpan}`}
+              className={`group border-border relative overflow-hidden rounded-2xl border bg-white shadow-sm md:rounded-3xl dark:bg-neutral-900 ${activity.colSpan} ${activity.rowSpan}`}
             >
               {/* Media Background */}
               <div className="absolute inset-0 z-0">
@@ -77,20 +100,20 @@ export default function ExperiencesSection({ lang = "en" }: { lang?: "en" | "pt"
                   <HoverVideoPlayer
                     videoSrc={activity.video}
                     thumbnailSrc={activity.thumbnail}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                     loop
                     muted
                     preload="auto"
                     pausedOverlay={
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-transparent transition-colors duration-500">
-                        <div className="bg-white/20 backdrop-blur-md rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <Play className="w-8 h-8 text-white fill-white" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors duration-500 group-hover:bg-transparent">
+                        <div className="rounded-full bg-white/20 p-3 opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
+                          <Play className="h-8 w-8 fill-white text-white" />
                         </div>
                       </div>
                     }
                     loadingOverlay={
                       <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                        <Loader2 className="w-8 h-8 text-white animate-spin" />
+                        <Loader2 className="h-8 w-8 animate-spin text-white" />
                       </div>
                     }
                   />
@@ -98,22 +121,22 @@ export default function ExperiencesSection({ lang = "en" }: { lang?: "en" | "pt"
                   <img
                     src={activity.image}
                     alt={activity.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 )}
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80 pointer-events-none" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80" />
               </div>
 
               {/* Content Overlay */}
-              <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8 pointer-events-none">
-                <div className="mb-3 inline-flex items-center justify-center rounded-full bg-white/20 p-2.5 backdrop-blur-md w-fit">
+              <div className="pointer-events-none relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
+                <div className="mb-3 inline-flex w-fit items-center justify-center rounded-full bg-white/20 p-2.5 backdrop-blur-md">
                   <activity.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-semibold text-white tracking-tight mb-2">
+                <h3 className="mb-2 text-xl font-semibold tracking-tight text-white md:text-2xl">
                   {activity.title}
                 </h3>
-                <p className="text-sm md:text-base text-neutral-200 leading-relaxed max-w-lg">
+                <p className="max-w-lg text-sm leading-relaxed text-neutral-200 md:text-base">
                   {activity.desc}
                 </p>
               </div>

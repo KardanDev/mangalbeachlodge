@@ -1,36 +1,50 @@
 ---
 import MobileReservationEmail from "./mobile-reservation-email";
+
+const lang = Astro.currentLocale || "en";
+
+const t = {
+  en: {
+    title1: "Mangal Beach Lodge",
+    heading: "Escape to the coast.",
+    description: "Check availability and plan your stay in seconds.",
+  },
+  pt: {
+    title1: "Mangal Beach Lodge",
+    heading: "Fuja para a costa.",
+    description: "Verifique a disponibilidade e planeie a sua estadia em segundos.",
+  },
+}[lang as "en" | "pt"];
 ---
 
 <aside
-    class="relative hidden min-h-[560px] overflow-hidden rounded-[1.6rem] border border-zinc-200/70 sm:min-h-[640px] lg:block dark:border-zinc-700"
+  class="relative hidden min-h-[560px] overflow-hidden rounded-[1.6rem] border border-zinc-200/70 sm:min-h-[640px] lg:block dark:border-zinc-700"
 >
-    <img
-        src="/plan-view.jpg"
-        alt="Turquoise water and shoreline at Mangal Beach Lodge"
-        class="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-        decoding="async"
-    />
-    <div class="absolute inset-x-0 top-0 bottom-0 z-10 p-6 sm:p-8">
-        <div class="max-w-md space-y-4">
-            <p class="text-xs tracking-[0.2em] text-white/70 uppercase">
-                Mangal Beach Lodge
-            </p>
+  <img
+    src="/plan-view.jpg"
+    alt="Turquoise water and shoreline at Mangal Beach Lodge"
+    class="absolute inset-0 h-full w-full object-cover"
+    loading="lazy"
+    decoding="async"
+  />
 
-            <h2
-                class="text-3xl leading-tight font-medium text-white sm:text-4xl"
-            >
-                Escape to the coast.
-            </h2>
+  <div class="absolute inset-x-0 top-0 bottom-0 z-10 p-6 sm:p-8">
+    <div class="max-w-md space-y-4">
+      <p class="text-xs uppercase tracking-[0.2em] text-white/70">
+        {t.title1}
+      </p>
 
-            <p class="text-sm text-white/80">
-                Check availability and plan your stay in seconds.
-            </p>
-        </div>
+      <h2 class="text-3xl leading-tight font-medium text-white sm:text-4xl">
+        {t.heading}
+      </h2>
 
-        <div class="absolute inset-x-0 bottom-0 space-y-4 p-5 sm:p-7">
-            <MobileReservationEmail client:load />
-        </div>
+      <p class="text-sm text-white/80">
+        {t.description}
+      </p>
     </div>
+
+    <div class="absolute inset-x-0 bottom-0 space-y-4 p-5 sm:p-7">
+      <MobileReservationEmail client:load lang={lang as 'en' | 'pt'} />
+    </div>
+  </div>
 </aside>

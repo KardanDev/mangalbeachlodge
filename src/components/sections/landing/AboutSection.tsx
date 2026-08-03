@@ -23,7 +23,7 @@ const getHighlights = (lang: "en" | "pt") => [
   {
     image: "/bar.jpeg",
     icon: Wine,
-    title: lang === "pt" ? "Bar na Praia" : "Beach Bar",
+    title: lang === "pt" ? "Top Tree Deck" : "Top Tree Deck Bar",
     description:
       lang === "pt"
         ? "Tome uma bebida no nosso bar com teto de colmo, com cocktails artesanais, cerveja local gelada e vistas panorâmicas sobre o oceano."

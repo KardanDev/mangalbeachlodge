@@ -2,7 +2,7 @@
 import ReservationEmail from "./reservation-email.astro";
 import MobileReservationEmail from "./mobile-reservation-email";
 
-const lang = Astro.currentLocale || "en";
+const lang = Astro.currentLocale || "en" ;
 
 const t = {
   en: {
@@ -88,7 +88,7 @@ const t = {
 
     <ReservationEmail />
     <div class="block md:hidden">
-      <MobileReservationEmail client:only="react" />
+      <MobileReservationEmail client:only="react"  lang={lang as 'en' | 'pt'} />
     </div>
   </div>
 </section>
