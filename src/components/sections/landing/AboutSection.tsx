@@ -8,13 +8,13 @@ const galleryImages = [
   { src: "/bar.jpeg", alt: "Beach bar with thatched roof" },
   { src: "/couple-coast.jpg", alt: "Crystal clear Inhambane coast" },
   { src: "/poolside.jpg", alt: "Poolside cabanas at Mangal" },
-  { src: "/seafood_wine.png", alt: "Fresh seafood and wine" },
+  { src: "/IMG_2365.jpeg", alt: "Fresh seafood and wine" },
   { src: "/sea.jpeg", alt: "Underwater marine life" },
   // duplicate for seamless infinite scroll
   { src: "/bar.jpeg", alt: "Beach bar with thatched roof" },
   { src: "/couple-coast.jpg", alt: "Crystal clear Inhambane coast" },
   { src: "/poolside.jpg", alt: "Poolside cabanas at Mangal" },
-  { src: "/seafood_wine.png", alt: "Fresh seafood and wine" },
+  { src: "/IMG_9042.jpeg", alt: "Fresh seafood and wine" },
   { src: "/sea.jpeg", alt: "Underwater marine life" },
 ];
 
@@ -24,25 +24,28 @@ const getHighlights = (lang: "en" | "pt") => [
     image: "/bar.jpeg",
     icon: Wine,
     title: lang === "pt" ? "Bar na Praia" : "Beach Bar",
-    description: lang === "pt"
-      ? "Tome uma bebida no nosso bar com teto de colmo, com cocktails artesanais, cerveja local gelada e vistas panorâmicas sobre o oceano."
-      : "Sip sundowners at our thatched-roof bar with handcrafted cocktails, cold local beer, and panoramic ocean views.",
+    description:
+      lang === "pt"
+        ? "Tome uma bebida no nosso bar com teto de colmo, com cocktails artesanais, cerveja local gelada e vistas panorâmicas sobre o oceano."
+        : "Sip sundowners at our thatched-roof bar with handcrafted cocktails, cold local beer, and panoramic ocean views.",
   },
   {
     image: "/poolside.jpg",
     icon: Waves,
     title: lang === "pt" ? "Refúgio à beira da piscina" : "Poolside Retreat",
-    description: lang === "pt"
-      ? "Relaxe à beira da piscina sob as cabanas drapeadas, cercado por jardins tropicais e pela brisa suave de Moçambique."
-      : "Unwind by the pool under draped cabanas, surrounded by tropical gardens and the gentle Mozambican breeze.",
+    description:
+      lang === "pt"
+        ? "Relaxe à beira da piscina sob as cabanas drapeadas, cercado por jardins tropicais e pela brisa suave de Moçambique."
+        : "Unwind by the pool under draped cabanas, surrounded by tropical gardens and the gentle Mozambican breeze.",
   },
   {
-    image: "/seafood_wine.png",
+    image: "/seafood_wine.jpeg",
     icon: UtensilsCrossed,
     title: lang === "pt" ? "Frutos do Mar e Jantar" : "Seafood & Dining",
-    description: lang === "pt"
-      ? "Saboreie frutos do mar recém-pescados combinados com vinhos finos no nosso restaurante ao ar livre, a poucos passos da costa."
-      : "Savour freshly caught seafood paired with fine wines in our open-air restaurant, steps from the shore.",
+    description:
+      lang === "pt"
+        ? "Saboreie frutos do mar recém-pescados combinados com vinhos finos no nosso restaurante ao ar livre, a poucos passos da costa."
+        : "Savour freshly caught seafood paired with fine wines in our open-air restaurant, steps from the shore.",
   },
 ];
 
@@ -70,23 +73,19 @@ export default function AboutSection({ lang = "en" }: { lang?: "en" | "pt" }) {
       title: "A coastal escape where the ocean",
       titleBreak: "meets authentic Mozambican warmth.",
       desc: "A coastal escape where the green meets the blue of the sea, surrounded by native trees, coconut palms, and the mangrove.",
-      learnMore: "Learn more about us"
+      learnMore: "Learn more about us",
     },
     pt: {
       badge: "Sobre Nós",
       title: "Um refúgio costeiro onde o oceano",
       titleBreak: "encontra o autêntico calor moçambicano.",
       desc: "Um refúgio costeiro onde o verde encontra o azul do mar rodeado por arvores nativas, coqueiros e o mangal",
-      learnMore: "Saiba mais sobre nós"
-    }
+      learnMore: "Saiba mais sobre nós",
+    },
   }[lang];
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="relative py-20 md:py-28"
-    >
+    <section id="about" ref={sectionRef} className="relative py-20 md:py-28">
       {/* ─── Header ─── */}
       <motion.div
         className="mx-auto max-w-3xl text-center"
@@ -95,23 +94,23 @@ export default function AboutSection({ lang = "en" }: { lang?: "en" | "pt" }) {
         variants={fadeUp}
         custom={0}
       >
-        <Badge variant="secondary" className="mb-5 text-muted-foreground">
+        <Badge variant="secondary" className="text-muted-foreground mb-5">
           {t.badge}
         </Badge>
 
-        <h2 className="font-heading text-3xl font-semibold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
+        <h2 className="font-heading text-foreground text-3xl leading-[1.15] font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem]">
           {t.title}
           <br className="hidden sm:block" />
           {t.titleBreak}
         </h2>
 
-        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-[0.938rem]">
+        <p className="text-muted-foreground mx-auto mt-5 max-w-xl text-sm leading-relaxed sm:text-[0.938rem]">
           {t.desc}
         </p>
 
         <a
           href="/#contact"
-          className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-amber-600"
+          className="text-foreground mt-6 inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-amber-600"
         >
           {t.learnMore}
           <ArrowRight className="h-4 w-4" />
