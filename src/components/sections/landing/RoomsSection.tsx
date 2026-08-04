@@ -46,6 +46,8 @@ const getRooms = (lang: "en" | "pt") => [
       "/standard_room/IMG_4081.jpeg",
       "/standard_room/321CD89F-4052-456B-B337-C54A2CA68C76.jpeg",
       "/standard_room/IMG_4093.jpeg",
+      "/standard_room/IMG_4079.jpeg",
+      "/standard_room/IMG_4080.jpeg",
     ],
     benefits: [
       {
