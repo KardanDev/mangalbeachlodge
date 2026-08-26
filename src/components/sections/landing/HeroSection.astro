@@ -1,18 +1,21 @@
 ---
-import ReservationEmail from "./reservation-email.astro";
-import MobileReservationEmail from "./mobile-reservation-email";
+import ReservationPromo from "./reservation-promo.astro";
+import ReservationDialog from "./reservation-dialog";
 
-const lang = Astro.currentLocale || "en" ;
+const lang = Astro.currentLocale || "en";
 
 const t = {
   en: {
     title1: "Where the Green meets the Blue,",
     title2: "a hidden paradise",
     title3: "at Mangal Beach Lodge!",
-    description1: "Escape to a place where the ocean breeze, swaying palms, and untouched nature create the perfect and relaxing staying. Wake up to the sound of the birds, relax beneath native tropical trees, and discover our stunning Top Tree Deck with panoramic views of the mangroves and the breathtaking Bazaruto Archipelago.",
-    description2: "Designed for comfort, surrounded by nature, and filled with tranquility, this is more than a stay, it’s an unforgettable experience.",
+    description1:
+      "Escape to a place where the ocean breeze, swaying palms, and untouched nature create the perfect and relaxing staying. Wake up to the sound of the birds, relax beneath native tropical trees, and discover our stunning Top Tree Deck with panoramic views of the mangroves and the breathtaking Bazaruto Archipelago.",
+    description2:
+      "Designed for comfort, surrounded by nature, and filled with tranquility, this is more than a stay, it’s an unforgettable experience.",
     location: "* Vilankulos, Inhambane, Mozambique",
     seeDirection: "See direction",
+    reserveNow: "Reserve now",
   },
   pt: {
     title1: "Onde o verde encontra o azul, um",
@@ -24,6 +27,7 @@ const t = {
       "Projetado para o conforto, cercado pela natureza e repleto de tranquilidade, esta é mais do que uma estadia, é uma experiência inesquecível.",
     location: "* Vilankulos, Inhambane, Moçambique",
     seeDirection: "Ver direções",
+    reserveNow: "Reservar agora",
   },
 }[lang as "en" | "pt"];
 ---
@@ -34,7 +38,7 @@ const t = {
   >
     <div class="w-full">
       <h1
-        class="max-w-4xl w-full text-5xl leading-[1.02] font-medium tracking-tight text-balance text-zinc-800 sm:text-6xl xl:text-6xl "
+        class="w-full max-w-4xl text-5xl leading-[1.02] font-medium tracking-tight text-balance text-zinc-800 sm:text-6xl xl:text-6xl"
       >
         {t.title1}
         <span class="block text-amber-600">{t.title2}</span>
@@ -86,9 +90,18 @@ const t = {
       </div>
     </div>
 
-    <ReservationEmail />
-    <div class="block md:hidden">
-      <MobileReservationEmail client:only="react"  lang={lang as 'en' | 'pt'} />
+    <ReservationPromo />
+    <div class="lg:hidden">
+      <button
+        type="button"
+        data-reservation-trigger
+        aria-haspopup="dialog"
+        class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-neutral-900 px-6 text-xs font-semibold tracking-widest text-white uppercase shadow-md transition hover:bg-black focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2 focus-visible:outline-none"
+      >
+        {t.reserveNow}
+      </button>
     </div>
   </div>
+
+  <ReservationDialog client:load lang={lang as "en" | "pt"} />
 </section>

@@ -1,6 +1,4 @@
 ---
-import MobileReservationEmail from "./mobile-reservation-email";
-
 const lang = Astro.currentLocale || "en";
 
 const t = {
@@ -8,15 +6,19 @@ const t = {
     title1: "Mangal Beach Lodge",
     heading: "Escape to the coast.",
     description: "Check availability and plan your stay in seconds.",
+    reserveNow: "Reserve now",
   },
   pt: {
     title1: "Mangal Beach Lodge",
     heading: "Fuja para a costa.",
-    description: "Verifique a disponibilidade e planeie a sua estadia em segundos.",
+    description:
+      "Verifique a disponibilidade e planeie a sua estadia em segundos.",
+    reserveNow: "Reservar agora",
   },
 }[lang as "en" | "pt"];
 ---
 
+<!-- Static content stays server-rendered; the page-level React dialog owns interactivity. -->
 <aside
   class="relative hidden min-h-[560px] overflow-hidden rounded-[1.6rem] border border-zinc-200/70 sm:min-h-[640px] lg:block dark:border-zinc-700"
 >
@@ -30,7 +32,7 @@ const t = {
 
   <div class="absolute inset-x-0 top-0 bottom-0 z-10 p-6 sm:p-8">
     <div class="max-w-md space-y-4">
-      <p class="text-xs uppercase tracking-[0.2em] text-white/70">
+      <p class="text-xs tracking-[0.2em] text-white/70 uppercase">
         {t.title1}
       </p>
 
@@ -44,7 +46,14 @@ const t = {
     </div>
 
     <div class="absolute inset-x-0 bottom-0 space-y-4 p-5 sm:p-7">
-      <MobileReservationEmail client:load lang={lang as 'en' | 'pt'} />
+      <button
+        type="button"
+        data-reservation-trigger
+        aria-haspopup="dialog"
+        class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-white px-6 text-xs font-semibold tracking-widest text-neutral-900 uppercase shadow-lg transition hover:bg-amber-50 focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:outline-none"
+      >
+        {t.reserveNow}
+      </button>
     </div>
   </div>
 </aside>

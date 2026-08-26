@@ -1,19 +1,18 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { AnimatePresence, motion } from "framer-motion";
+import { Dialog } from "radix-ui";
 import { Badge } from "@/components/ui/badge";
 import {
   X,
   ChevronLeft,
   ChevronRight,
   BedDouble,
-  Coffee,
   Users,
   Waves,
   Sparkles,
   Home,
   UtensilsCrossed,
-  ShieldCheck,
   Wifi,
   Droplets,
   Wind,
@@ -219,7 +218,7 @@ const getSteps = (lang: "en" | "pt") => [
 /* ════════════════════════════════════════════════════════════════════════ */
 /*  CAROUSEL MODAL                                                        */
 /* ════════════════════════════════════════════════════════════════════════ */
-/** Maps RoomsSection room IDs → MobileReservationEmail room types */
+/** Maps room-card IDs to the shared reservation dialog room types. */
 const ROOM_TYPE_MAP: Record<string, string> = {
   standard: "standard",
   house: "villa",
@@ -253,182 +252,186 @@ function RoomModal({ room, onClose, lang }: ModalProps) {
   );
   const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
 
-  /* keyboard nav */
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [onClose, prev, next]);
-
-  /* lock scroll */
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
-
   return (
-    <motion.div
-      className="fixed inset-0 z-9999 flex items-center justify-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <Dialog.Root
+      open
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
     >
-      {/* backdrop */}
-      <motion.div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-        onClick={onClose}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      />
+      <Dialog.Portal>
+        <Dialog.Overlay asChild>
+          <motion.div
+            className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        </Dialog.Overlay>
 
-      {/* panel */}
-      <motion.div
-        className="relative z-10 mx-4 flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row"
-        initial={{ scale: 0.92, opacity: 0, y: 30 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.92, opacity: 0, y: 30 }}
-        transition={{ type: "spring", stiffness: 260, damping: 24 }}
-      >
-        {/* close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-md transition hover:bg-black/50"
-          aria-label="Close modal"
-        >
-          <X className="h-5 w-5" />
-        </button>
-
-        {/* ─── LEFT: Carousel ─── */}
-        <div className="relative flex aspect-[4/3] w-full items-center justify-center bg-neutral-900 md:w-1/2">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={room.gallery[current]}
-              src={room.gallery[current]}
-              alt={`${room.name} photo ${current + 1}`}
-              className="absolute inset-0 h-full w-full object-cover"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 0.35 }}
-            />
-          </AnimatePresence>
-
-          {/* arrows */}
-          {total > 1 && (
-            <>
-              <button
-                onClick={prev}
-                className="absolute top-1/2 left-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition hover:bg-white/40"
-                aria-label="Previous photo"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={next}
-                className="absolute top-1/2 right-3 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition hover:bg-white/40"
-                aria-label="Next photo"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </>
-          )}
-
-          {/* dots */}
-          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-            {room.gallery.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Go to photo ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  i === current
-                    ? "w-6 bg-white"
-                    : "w-2 bg-white/50 hover:bg-white/70"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ─── RIGHT: Details ─── */}
-        <div className="flex w-full flex-col gap-5 overflow-y-auto p-6 md:w-1/2 md:p-8">
-          <div>
-            <Badge
-              variant="secondary"
-              className="text-muted-foreground mb-2 text-xs"
-            >
-              {room.badge}
-            </Badge>
-            <h3 className="text-foreground text-2xl font-semibold tracking-tight">
-              {room.name}
-            </h3>
-            <p className="text-muted-foreground mt-1 text-sm">
-              {room.description}
-            </p>
-          </div>
-
-          {/* Benefits */}
-          <div className="grid grid-cols-2 gap-3">
-            {room.benefits.map((b) => (
-              <div
-                key={b.label}
-                className="border-border text-foreground flex items-center gap-2 rounded-xl border bg-neutral-50 px-3 py-2.5 text-sm"
-              >
-                <b.icon className="h-4 w-4 shrink-0 text-amber-600" />
-                {b.label}
-              </div>
-            ))}
-          </div>
-
-          {/* Pricing table */}
-          <div className="border-border rounded-xl border bg-neutral-50 p-4">
-            <h4 className="text-muted-foreground mb-3 text-xs font-semibold tracking-wider uppercase">
-              {lang === "pt"
-                ? "Preços Sazonais (MZN)"
-                : "Seasonal Pricing (MZN)"}
-            </h4>
-            <div className="space-y-2 text-sm">
-              {room.pricing.map((p) => (
-                <div
-                  key={p.season}
-                  className="flex items-center justify-between"
-                >
-                  <span className="text-foreground">{p.season}</span>
-                  <span className="text-foreground font-medium">
-                    {"price" in p ? p.price : ""}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Extras */}
-          <ul className="text-muted-foreground space-y-1 text-xs">
-            {room.extras.map((e) => (
-              <li key={e} className="flex items-start gap-1.5">
-                <Sparkles className="mt-0.5 h-3 w-3 shrink-0 text-amber-500" />
-                {e}
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA */}
-          <button
-            onClick={handleReserve}
-            className="mt-auto inline-flex items-center justify-center rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-[0.97]"
+        <Dialog.Content asChild>
+          <motion.div
+            data-lenis-prevent
+            className="fixed top-1/2 left-1/2 z-[100] flex h-[calc(100vh-1.5rem)] w-[calc(100%-1.5rem)] max-w-5xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-2xl outline-none supports-[height:100dvh]:h-[calc(100dvh-1.5rem)] sm:h-[calc(100vh-3rem)] sm:max-h-[720px] sm:rounded-3xl sm:supports-[height:100dvh]:h-[calc(100dvh-3rem)] md:flex-row"
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                prev();
+              }
+              if (event.key === "ArrowRight") {
+                event.preventDefault();
+                next();
+              }
+            }}
+            initial={{ scale: 0.96, opacity: 0, y: 24 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.96, opacity: 0, y: 24 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
           >
-            {lang === "pt" ? "Reservar Este Quarto" : "Reserve This Room"}
-          </button>
-        </div>
-      </motion.div>
-    </motion.div>
+            {/* close */}
+            <Dialog.Close asChild>
+              <button
+                type="button"
+                className="absolute top-3 right-3 z-20 flex size-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition hover:bg-black/60 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                aria-label={lang === "pt" ? "Fechar detalhes" : "Close details"}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </Dialog.Close>
+
+            {/* ─── LEFT: Carousel ─── */}
+            <div className="relative flex aspect-[16/10] w-full shrink-0 items-center justify-center bg-neutral-900 md:aspect-auto md:w-1/2">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={room.gallery[current]}
+                  src={room.gallery[current]}
+                  alt={`${room.name} photo ${current + 1}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -40 }}
+                  transition={{ duration: 0.35 }}
+                />
+              </AnimatePresence>
+
+              {/* arrows */}
+              {total > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={prev}
+                    className="absolute top-1/2 left-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-md transition hover:bg-black/55 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                    aria-label="Previous photo"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={next}
+                    className="absolute top-1/2 right-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-md transition hover:bg-black/55 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                    aria-label="Next photo"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+
+              {/* dots */}
+              <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+                {room.gallery.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setCurrent(i)}
+                    aria-label={`Go to photo ${i + 1}`}
+                    className={`flex h-11 items-center justify-center rounded-full transition-all before:h-2 before:rounded-full before:transition-all ${
+                      i === current
+                        ? "w-8 before:w-6 before:bg-white"
+                        : "w-5 before:w-2 before:bg-white/50 hover:before:bg-white/70"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* ─── RIGHT: Details ─── */}
+            <div
+              className="flex min-h-0 w-full flex-1 touch-pan-y flex-col gap-5 overflow-y-auto overscroll-contain p-5 [-webkit-overflow-scrolling:touch] md:w-1/2 md:p-8"
+              data-lenis-prevent
+            >
+              <div>
+                <Badge
+                  variant="secondary"
+                  className="text-muted-foreground mb-2 text-xs"
+                >
+                  {room.badge}
+                </Badge>
+                <Dialog.Title className="text-foreground text-2xl font-semibold tracking-tight">
+                  {room.name}
+                </Dialog.Title>
+                <Dialog.Description className="text-muted-foreground mt-1 text-sm">
+                  {room.description}
+                </Dialog.Description>
+              </div>
+
+              {/* Benefits */}
+              <div className="grid grid-cols-2 gap-3">
+                {room.benefits.map((b) => (
+                  <div
+                    key={b.label}
+                    className="border-border text-foreground flex items-center gap-2 rounded-xl border bg-neutral-50 px-3 py-2.5 text-sm"
+                  >
+                    <b.icon className="h-4 w-4 shrink-0 text-amber-600" />
+                    {b.label}
+                  </div>
+                ))}
+              </div>
+
+              {/* Pricing table */}
+              <div className="border-border rounded-xl border bg-neutral-50 p-4">
+                <h4 className="text-muted-foreground mb-3 text-xs font-semibold tracking-wider uppercase">
+                  {lang === "pt"
+                    ? "Preços Sazonais (MZN)"
+                    : "Seasonal Pricing (MZN)"}
+                </h4>
+                <div className="space-y-2 text-sm">
+                  {room.pricing.map((p) => (
+                    <div
+                      key={p.season}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-foreground">{p.season}</span>
+                      <span className="text-foreground font-medium">
+                        {"price" in p ? p.price : ""}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Extras */}
+              <ul className="text-muted-foreground space-y-1 text-xs">
+                {room.extras.map((e) => (
+                  <li key={e} className="flex items-start gap-1.5">
+                    <Sparkles className="mt-0.5 h-3 w-3 shrink-0 text-amber-500" />
+                    {e}
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <button
+                type="button"
+                onClick={handleReserve}
+                className="mt-auto inline-flex min-h-11 items-center justify-center rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.97]"
+              >
+                {lang === "pt" ? "Reservar Este Quarto" : "Reserve This Room"}
+              </button>
+            </div>
+          </motion.div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
 
@@ -450,8 +453,11 @@ function RoomCard({
       <CardBody className="group/card border-border relative h-auto w-full max-w-[520px] rounded-2xl border bg-white p-5 shadow-sm transition-shadow hover:shadow-xl dark:bg-neutral-900">
         {/* Image */}
         <CardItem translateZ={50} className="w-full">
-          <div
-            className="relative cursor-pointer overflow-hidden rounded-xl"
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            aria-label={`${lang === "pt" ? "Ver detalhes de" : "View details for"} ${room.name}`}
+            className="relative block w-full cursor-pointer overflow-hidden rounded-xl text-left focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2 focus-visible:outline-none"
             onClick={onOpen}
           >
             <img
@@ -474,7 +480,7 @@ function RoomCard({
               <Sparkles className="h-3.5 w-3.5" />
               {lang === "pt" ? "Ver Galeria" : "View Gallery"}
             </span>
-          </div>
+          </button>
         </CardItem>
 
         {/* Title + price */}
@@ -520,6 +526,8 @@ function RoomCard({
         {/* CTA */}
         <CardItem translateZ={40} className="mt-5 w-full">
           <button
+            type="button"
+            aria-haspopup="dialog"
             onClick={onOpen}
             className="w-full rounded-xl bg-neutral-900 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 active:scale-[0.98]"
           >
